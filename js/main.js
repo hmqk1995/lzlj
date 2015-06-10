@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	//为按钮增加事件处理程序
 	(function(){
-		$('#rule').on('tap', function(){
+		function showMask(){
     		var container = document.getElementById('container');
     		var panel = document.createElement('div');
     		$('#mask').show();
@@ -12,13 +12,42 @@ $(document).ready(function(){
     		panel.style.width = '100%'
     		panel.style.height = '100%';
     		container.appendChild(panel);
-    		panel.innerHTML = '<img src="img/panel.png" style="width:320px;height:467px;position:absolute;top:50%;left:50%;margin-left:-160px;margin-top:-233px;"/><div id="panel_button" style="width:90px;height:45px;position:absolute;top:50%;left:50%;margin-left:-40px;margin-top:120px;"></div>';
-    		var button = document.getElementById('panel_button');
-    		var $button = $(button);
-    		$button.on('tap',function(){
-    			container.removeChild(panel);
-    			$('#mask').hide();
-    		});
+    		panel.innerHTML = '<div id="panel_list" style="background:url(\'img/panel2.png\');background-size: 100%;width:320px;height:467px;position:absolute;top:50%;left:50%;margin-left:-160px;margin-top:-233px;"></div>';
+    		panel.innerHTML += '<div id="panel_button" style="width:90px;height:45px;position:absolute;top:50%;left:50%;margin-left:-40px;margin-top:120px;"></div>';
+		}
+
+		function addButtonListener () {
+			$('#panel_button').on('tap',function(){
+	    			$('#panel').remove();
+	    			$('#mask').hide();
+	    		});
+		}
+
+		$('#rule').on('tap', function(){
+			showMask();
+			var imgSrc = '<img src="img/txt1.png" alt="" style="width:160px;position:absolute;top:60%;left:50%;margin-left:-75px;margin-top:-120px;"/>';
+			$('#panel_list')[0].innerHTML += imgSrc;
+			addButtonListener();
+		});
+
+		$('#desc').on('tap', function(){
+			showMask();
+			var iPage=2; //页面数目
+			var imgSrc = '<img src="img/txt'+ iPage +'.png" alt="" style="width:160px;position:absolute;top:55%;left:50%;margin-left:-75px;margin-top:-120px;" />';
+			var buttonL = '<img id="button_l" src="img/button_l.png" alt="" style="width:30px;position:absolute;bottom:25%;left:28%;margin-top:-120px;" />';
+			var buttonR = '<img id="button_r" src="img/button_r.png" alt="" style="width:30px;position:absolute;bottom:25%;right:25%;margin-top:-120px;" />';
+			$('#panel_list')[0].innerHTML += imgSrc;
+			$('#panel_list')[0].innerHTML += buttonL;
+			$('#panel_list')[0].innerHTML += buttonR;
+			addButtonListener();
+
+			//翻页效果（未处理）
+			// $('#button_l').on('tap',function(){
+			// 	iPage += 1;
+			// });
+			// $('#button_r').on('tap',function(){
+			// 	iPage -= 1;
+			// });
 		});
 
 		$('#start').on('tap', function(){

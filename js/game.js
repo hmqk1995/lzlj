@@ -21,7 +21,16 @@ $(document).ready(function(){
 			node.style.top = bHeight + 'px';
 			//加入点击进入下一页事件(当点击图片时，跳转到相应礼品页)
 			$('.game_img').on('tap', function(){
-				location.href = 'game2.html';
+				clearInterval(interval);
+				clearInterval(changeInterval);
+				$('#bottle_container').addClass('animated rollOut');
+				$('#img_area_game_2').show().addClass('animated rotateIn');
+				setTimeout(function(){
+					$("#game_cloud").removeClass();
+					$("#game_container").children().addClass('animated fadeOut');
+				}, 1200);
+				setTimeout(function(){location.href = 'game2.html';}, 2400);
+				
 			});
 			setTimeout(function () {
 				//移除最前面的一个img元素

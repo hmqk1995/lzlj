@@ -148,7 +148,7 @@ html,body {
 	height: 115px;
 	background: url('../img/brand.png') no-repeat;
 	background-size: 100%;
-	left: 20px;
+	left: 10px;
 	top: 10%;
 	z-index: 2000;
 }
@@ -254,10 +254,21 @@ html,body {
 	top: 100px;
 }
 
+#img_area_game_2 {
+	width: 80%;
+	margin-left: -43%;
+	height: 100%;
+	background: url('../img/game2_win.png') no-repeat;
+	background-size: 100%;
+	left: 50%;
+	top: 100px;
+}
+
 /*****************************
 	---   game2.html  ---
 *****************************/
 #game2_container {overflow: hidden;}
+#game2_wrapper {opacity: 0;}
 /* 1为lantern 2为win 3为bottle 4为button 5为friend 6为ads 7为brand*/
 #img_area_game2_1 {
 	width: 15%;
@@ -276,6 +287,7 @@ html,body {
 	background-size: 100%;
 	left: 50%;
 	top: 10px;
+	display: none;
 }
 
 #img_area_game2_3 {
@@ -285,7 +297,7 @@ html,body {
 	background: url('../img/game2_bottle.png') no-repeat;
 	background-size: 100%;
 	left: 50%;
-	top: 90px;
+	top: 40px;
 }
 
 #img_area_game2_4 {
