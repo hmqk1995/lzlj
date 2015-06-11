@@ -42,6 +42,9 @@ gulp.task('scss', function() {
 gulp.task('css', function() {
   gulp.src('src/stylesheets/*.css')
     .pipe(gulp.dest('public/assets/css'))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(minifycss())
+    .pipe(gulp.dest('public/assets/css'))
     .pipe(notify({ message: 'CSS Stylesheets task complete!' }));
 });
 
@@ -97,7 +100,7 @@ gulp.task('image', function() {
 // Libs Copy ========================================
 var libs = {
     js: [
-        "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/0-zepto.min.js",
         "bower_components/underscore/underscore.min.js"
     ],
     css: [
