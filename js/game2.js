@@ -22,9 +22,8 @@ $(document).ready(function() {
 	setTimeout(function(){$('#img_area_game2_8').removeClass('infinite').addClass('slideOutRight');}, 2000);
 
 	//名牌事件处理程序
-	var $brand = $('#img_area_game2_7');
-	$brand.on('swipeRight', function(){
-		$brand.addClass('animated hinge');
+	$('#img_area_game2_7').live('swipeRight', function(){
+		$('#img_area_game2_7').addClass('animated hinge');
 		setTimeout(function(){
 			location.href = 'giftdemo.html';
 		}, 1500);

@@ -28,16 +28,16 @@ $(document).ready(function(){
 				setTimeout(function(){
 					$("#game_cloud").removeClass();
 					$("#game_container").children().addClass('animated fadeOut');
-				}, 1200);
-				setTimeout(function(){location.href = 'game2.html';}, 2400);
+				}, 600);
+				setTimeout(function(){location.href = 'game2.html';}, 3000);
 				
 			});
 			setTimeout(function () {
 				//移除最前面的一个img元素
 				bContainer.removeChild(bContainer.childNodes[0]);
-			}, 2400);
+			}, 200);
 		}
-		var changeInterval = setInterval(function(){bImg.showAndFade()}, 800);
+		var changeInterval = setInterval(function(){bImg.showAndFade()}, 200);
 	
 
 	//倒计时

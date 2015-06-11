@@ -16,40 +16,77 @@ $(document).ready(function(){
     		panel.innerHTML += '<div id="panel_button" style="width:90px;height:45px;position:absolute;top:50%;left:50%;margin-left:-40px;margin-top:120px;"></div>';
 		}
 
-		function addButtonListener () {
+		function addButtonListener (callback) {
 			$('#panel_button').on('tap',function(){
 	    			$('#panel').remove();
 	    			$('#mask').hide();
 	    		});
+			if (callback != undefined) {
+				callback();
+			}
 		}
-
+		//规则按钮
 		$('#rule').on('tap', function(){
 			showMask();
 			var imgSrc = '<img src="img/txt1.png" alt="" style="width:160px;position:absolute;top:60%;left:50%;margin-left:-75px;margin-top:-120px;"/>';
 			$('#panel_list')[0].innerHTML += imgSrc;
 			addButtonListener();
 		});
-
+		//产品介绍按钮
 		$('#desc').on('tap', function(){
 			showMask();
-			var iPage=2; //页面数目
-			var imgSrc = '<img src="img/txt'+ iPage +'.png" alt="" style="width:160px;position:absolute;top:55%;left:50%;margin-left:-75px;margin-top:-120px;" />';
+			var imgSrc = '<img id="desc_img" src="img/txt2.png" alt="" style="width:160px;position:absolute;top:55%;left:50%;margin-left:-75px;margin-top:-120px;" />';
 			var buttonL = '<img id="button_l" src="img/button_l.png" alt="" style="width:30px;position:absolute;bottom:25%;left:28%;margin-top:-120px;" />';
 			var buttonR = '<img id="button_r" src="img/button_r.png" alt="" style="width:30px;position:absolute;bottom:25%;right:25%;margin-top:-120px;" />';
 			$('#panel_list')[0].innerHTML += imgSrc;
 			$('#panel_list')[0].innerHTML += buttonL;
 			$('#panel_list')[0].innerHTML += buttonR;
-			addButtonListener();
+			addButtonListener(function(){iPage = 2;});
 
-			//翻页效果（未处理）
-			// $('#button_l').on('tap',function(){
-			// 	iPage += 1;
-			// });
-			// $('#button_r').on('tap',function(){
-			// 	iPage -= 1;
-			// });
+			$('#button_l').hide();
+			//追踪页面按钮
+			var iPage = 2; //页面数目
+			function isPage() {
+				switch (iPage) {
+					case 2:
+						$('#button_l').hide();
+						$('#button_r').show();
+						break;
+					case 3:
+						$('#button_l').show();
+						$('#button_r').show();
+						break;
+					case 4:
+						$('#button_l').show();
+						$('#button_r').hide();
+						break;
+				}
+			}
+			//翻页效果
+			$('#button_l').live('click',function tapLeft(){
+				iPage -= 1;
+				isPage();
+				$('#desc_img').remove();
+				imgSrc = '<img id="desc_img" src="img/txt'+ iPage +'.png" alt="" style="width:160px;position:absolute;top:55%;left:50%;margin-left:-75px;margin-top:-120px;" />';
+				$('#panel_list')[0].innerHTML += imgSrc;
+			});
+			$('#button_r').live('click',function tapRight(){
+				iPage += 1;
+				isPage();
+				$('#desc_img').remove();
+				imgSrc = '<img id="desc_img" src="img/txt'+ iPage +'.png" alt="" style="width:160px;position:absolute;top:55%;left:50%;margin-left:-75px;margin-top:-120px;" />';
+				$('#panel_list')[0].innerHTML += imgSrc;
+			});
+			
 		});
-
+		//战绩按钮
+		$('#score').on('tap', function(){
+			showMask();
+			addButtonListener();
+			var imgSrc = '<img src="img/togetpride.png" alt="" style="width:160px;position:absolute;top:60%;left:50%;margin-left:-75px;margin-top:-120px;"/>';
+			$('#panel_list')[0].innerHTML += imgSrc;
+		});
+		//开始按钮
 		$('#start').on('tap', function(){
 			location.href = 'game.html';
 		});

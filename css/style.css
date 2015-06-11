@@ -345,3 +345,9 @@ html,body {
 	}
 	#start {height: 70px;} #score {height: 50px;}#rule {top: 120px;height: 50px;}#desc {top: 170px;height: 60px;}
 }
+
+@media (max-height: 460px) {
+	#img_area_4 {
+		bottom: -120px;
+	}
+}
