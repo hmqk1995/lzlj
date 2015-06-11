@@ -6,13 +6,13 @@ class @Share extends APIModel
             @__getInfo()
         return
 
-    create: (data) ->
+    create: (data = {}) ->
         console.log @modelName
         that = this
         APIdata = @__apiReq
             method: 'POST'
             url: "#{that.modelName}"
-            data: data || {}
+            data: data
         @__mountData APIdata
 
     __getInfo: ->

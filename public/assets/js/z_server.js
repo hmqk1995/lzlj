@@ -49,7 +49,7 @@ this.APIModel = (function() {
       type: set.method,
       url: API_URL + "/" + set.url,
       params: set.params,
-      data: JSON.parse(set.data),
+      data: JSON.stringify(set.data),
       contentType: "application/json;charset=utf-8",
       dataType: "json",
       async: false,
@@ -69,7 +69,7 @@ this.APIModel = (function() {
     that = this;
     console.log("Mount data!");
     _.mapObject(data, function(k, v) {
-      return that[k] = v;
+      return that[v] = k;
     });
   };
 
@@ -94,12 +94,15 @@ this.Share = (function(superClass) {
 
   Share.prototype.create = function(data) {
     var APIdata, that;
+    if (data == null) {
+      data = {};
+    }
     console.log(this.modelName);
     that = this;
     APIdata = this.__apiReq({
       method: 'POST',
       url: "" + that.modelName,
-      data: data || {}
+      data: data
     });
     return this.__mountData(APIdata);
   };

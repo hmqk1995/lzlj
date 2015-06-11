@@ -4,8 +4,8 @@ var gulp         = require('gulp'),
     minifycss    = require('gulp-minify-css'),
     jshint       = require('gulp-jshint'),
     uglify       = require('gulp-uglify'),
-    imagemin     = require('gulp-imagemin'),
-    pngquant     = require('imagemin-pngquant'),
+    //imagemin     = require('gulp-imagemin'),
+    //pngquant     = require('imagemin-pngquant'),
     rename       = require('gulp-rename'),
     concat       = require('gulp-concat'),
     notify       = require('gulp-notify'),
@@ -93,7 +93,7 @@ gulp.task('html', function () {
 
 gulp.task('image', function() {
   gulp.src('./src/images/**')
-      .pipe(imagemin({
+    //.pipe(imagemin({
                 progressive: true,
                 use: [pngquant()]
             }))
@@ -105,8 +105,7 @@ gulp.task('image', function() {
 // Libs Copy ========================================
 var libs = {
     js: [
-        "bower_components/jquery/dist/jquery.min.js",
-        "bower_components/hammerjs/hammer.min.js",
+        "bower_components/0-zepto.min.js",
         "bower_components/underscore/underscore.min.js"
     ],
     css: [

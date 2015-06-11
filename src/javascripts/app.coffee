@@ -30,7 +30,7 @@ class @APIModel
             type: set.method
             url: "#{API_URL}/#{set.url}"
             params: set.params
-            data: JSON.parse set.data
+            data: JSON.stringify set.data
             contentType: "application/json;charset=utf-8"
             dataType: "json"
             async: false
@@ -45,5 +45,5 @@ class @APIModel
         that = this
         console.log "Mount data!"
         _.mapObject data, (k,v) ->
-            that[k] = v
+            that[v] = k
         return
