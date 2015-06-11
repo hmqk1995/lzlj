@@ -105,26 +105,32 @@ $(document).ready(function(){
 		}
 	}());
 	//初始化结束
+	function start() {
+		$('#img_area_1').css('opacity',1);
+		$('#img_area_1').addClass('animated zoomInDown');
 
-	$('#img_area_1').css('opacity',1);
-	$('#img_area_1').addClass('animated zoomInDown');
+		setTimeout(function(){
+			$('#img_area_2').css('opacity',1);
+			$('#img_area_2').addClass('animated fadeInLeft');},
+			100);
 
+		setTimeout(function(){
+			$('#img_area_3').css('opacity',1);
+			$('#img_area_3').addClass('animated bounceInDown');},
+			600);
+
+		setTimeout(function(){
+			$('#img_area_4').css('opacity',1);
+			$('#img_area_4').addClass('animated bounceInUp');
+			$('#img_area_5').css('opacity',1);
+			$('#img_area_5').addClass('animated fadeIn');
+			$('#img_area_6').css('opacity',1);
+			$('#img_area_6').addClass('animated fadeIn');},
+			1100);
+	}
+	//加载完成，显示页面
 	setTimeout(function(){
-		$('#img_area_2').css('opacity',1);
-		$('#img_area_2').addClass('animated fadeInLeft');},
-		100);
-
-	setTimeout(function(){
-		$('#img_area_3').css('opacity',1);
-		$('#img_area_3').addClass('animated bounceInDown');},
-		600);
-
-	setTimeout(function(){
-		$('#img_area_4').css('opacity',1);
-		$('#img_area_4').addClass('animated bounceInUp');
-		$('#img_area_5').css('opacity',1);
-		$('#img_area_5').addClass('animated fadeIn');
-		$('#img_area_6').css('opacity',1);
-		$('#img_area_6').addClass('animated fadeIn');},
-		1100);
+		$("#loading_img").remove();
+		start();
+	}, 4000);
 });
