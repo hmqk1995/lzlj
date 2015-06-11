@@ -34,6 +34,34 @@ API_URL = "https://leancloud.cn/1.1/classes";
 this.APIModel = (function() {
   function APIModel() {}
 
+  APIModel.prototype.create = function(data) {
+    if (data == null) {
+      data = {};
+    }
+    return this.__apiReq({
+      method: 'POST',
+      url: "" + this.modelName,
+      data: data
+    });
+  };
+
+  APIModel.prototype.__getInfo = function() {
+    return this.__apiReq({
+      url: this.modelName + "/" + this.objectId
+    });
+  };
+
+  APIModel.prototype.update = function(data) {
+    if (data == null) {
+      data = {};
+    }
+    return this.__apiReq({
+      method: 'PUT',
+      url: this.modelName + "/" + this.objectId,
+      data: data
+    });
+  };
+
   APIModel.prototype.__apiReq = function(set) {
     var result;
     if (set == null) {
@@ -63,6 +91,14 @@ this.APIModel = (function() {
     return result;
   };
 
+  APIModel.prototype.__mountData = function(data) {
+    var that;
+    that = this;
+    _.mapObject(data, function(k, v) {
+      return that[k] = v;
+    });
+  };
+
   return APIModel;
 
 })();
@@ -77,77 +113,15 @@ this.Share = (function(superClass) {
     return Share.__super__.constructor.apply(this, arguments);
   }
 
-  Share.prototype.constractor = function(ownerId) {
-    if (ownerId == null) {
-      ownerId = null;
-    }
-    if (ownerId !== null) {
-      this.__getDataByOwnerId(ownerId);
+  Share.prototype.constractor = function(objectId) {
+    this.objectId = objectId != null ? objectId : "";
+    this.modelName = "Share";
+    if (this.objectId.length > 1) {
+      this.__mountData(this.__getInfo());
     }
   };
 
   Share.prototype.share = function() {};
-
-  Share.prototype.create = function(ownerId) {
-    return this.__analyseData(this.__apiReq({
-      method: "POST",
-      url: "Share",
-      data: {
-        ownerId: ownerId
-      }
-    }));
-  };
-
-  Share.prototype.helpd = function() {
-    var data, result;
-    data = {
-      helper: {
-        "__op": "AddUnique",
-        "objects": [helperId]
-      }
-    };
-    console.log(data);
-    result = this.__apiReq({
-      method: "PUT",
-      url: "Share/" + this.objectId,
-      data: data
-    });
-    console.log(result);
-    this.__updateData();
-  };
-
-  Share.prototype.__getDataByOwnerId = function(ownerId) {
-    var data;
-    data = this.__apiReq({
-      url: "Share",
-      params: {
-        where: "{'ownerId':'" + ownerId + "'}"
-      }
-    });
-    this.__analyseData(data.results[0]);
-  };
-
-  Share.prototype.__updateData = function() {
-    this.__analyseData(this.__apiReq({
-      url: "Share/" + this.objectId
-    }));
-  };
-
-  Share.prototype.__analyseData = function(json) {
-    this.objectId = json.objectId;
-    this.helpers = json.helper;
-    this.ownerId = json.ownerId;
-    this.status = this.__isDone();
-    console.log("objectId: " + this.objectId + ", ownerId: " + this.ownerId + ", helpers: " + this.helpers);
-  };
-
-  Share.prototype.__isDone = function() {
-    if (_.uniq(this.helpers).length > 2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   return Share;
 

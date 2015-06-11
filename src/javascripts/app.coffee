@@ -24,6 +24,22 @@ window.App =
 API_URL = "https://leancloud.cn/1.1/classes"
 
 class @APIModel
+    create: (data = {}) ->
+        @__apiReq
+            method: 'POST'
+            url: "#{@modelName}"
+            data: data
+
+    __getInfo: ->
+        @__apiReq
+            url: "#{@modelName}/#{@objectId}"
+
+    update: (data = {}) ->
+        @__apiReq
+            method: 'PUT'
+            url: "#{@modelName}/#{@objectId}"
+            data: data
+
     __apiReq: (set = {method: 'GET', data: {}, params: {}, url: ""}) ->
         result = {}
         $.ajax
@@ -40,6 +56,8 @@ class @APIModel
                 "X-AVOSCloud-Application-Key": "qs35km6zeer3sglasmy6nkcc9zhc4s1cbyu2j7kkskhsr1g4"
         return result
 
-        
-
-    
+    __mountData: (data) ->
+        that = this
+        _.mapObject data, (k,v) ->
+            that[k] = v
+        return
