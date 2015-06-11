@@ -88,7 +88,7 @@ $(document).ready(function(){
 		});
 		//开始按钮
 		$('#start').on('tap', function(){
-			location.href = 'game.html';
+			location.replace('game.html');
 		});
 	}());
 
