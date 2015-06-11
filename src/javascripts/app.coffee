@@ -24,30 +24,15 @@ window.App =
 API_URL = "https://leancloud.cn/1.1/classes"
 
 class @APIModel
-    create: (data = {}) ->
-        @__mountData @__apiReq
-            method: 'POST'
-            url: "#{@modelName}"
-            data: data
-
-    __getInfo: ->
-        @__mountData @__apiReq
-            url: "#{@modelName}/#{@objectId}"
-
-    update: (data = {}) ->
-        @__mountData @__apiReq
-            method: 'PUT'
-            url: "#{@modelName}/#{@objectId}"
-            data: data
-
     __apiReq: (set = {method: 'GET', data: {}, params: {}, url: ""}) ->
         result = {}
         $.ajax
             type: set.method
             url: "#{API_URL}/#{set.url}"
-            dataType: "JSON"
             params: set.params
-            data: set.data
+            data: JSON.parse set.data
+            contentType: "application/json;charset=utf-8"
+            dataType: "json"
             async: false
             success: (data, _) ->
                 result = data

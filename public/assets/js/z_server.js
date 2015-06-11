@@ -34,34 +34,6 @@ API_URL = "https://leancloud.cn/1.1/classes";
 this.APIModel = (function() {
   function APIModel() {}
 
-  APIModel.prototype.create = function(data) {
-    if (data == null) {
-      data = {};
-    }
-    return this.__mountData(this.__apiReq({
-      method: 'POST',
-      url: "" + this.modelName,
-      data: data
-    }));
-  };
-
-  APIModel.prototype.__getInfo = function() {
-    return this.__mountData(this.__apiReq({
-      url: this.modelName + "/" + this.objectId
-    }));
-  };
-
-  APIModel.prototype.update = function(data) {
-    if (data == null) {
-      data = {};
-    }
-    return this.__mountData(this.__apiReq({
-      method: 'PUT',
-      url: this.modelName + "/" + this.objectId,
-      data: data
-    }));
-  };
-
   APIModel.prototype.__apiReq = function(set) {
     var result;
     if (set == null) {
@@ -76,9 +48,10 @@ this.APIModel = (function() {
     $.ajax({
       type: set.method,
       url: API_URL + "/" + set.url,
-      dataType: "JSON",
       params: set.params,
-      data: set.data,
+      data: JSON.parse(set.data),
+      contentType: "application/json;charset=utf-8",
+      dataType: "json",
       async: false,
       success: function(data, _) {
         return result = data;
@@ -110,16 +83,48 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
 this.Share = (function(superClass) {
   extend(Share, superClass);
 
-  function Share() {
-    return Share.__super__.constructor.apply(this, arguments);
-  }
-
-  Share.prototype.constractor = function(objectId) {
+  function Share(objectId) {
     this.objectId = objectId != null ? objectId : "";
     this.modelName = "Share";
     if (this.objectId.length > 1) {
       this.__getInfo();
     }
+    return;
+  }
+
+  Share.prototype.create = function(data) {
+    var APIdata, that;
+    console.log(this.modelName);
+    that = this;
+    APIdata = this.__apiReq({
+      method: 'POST',
+      url: "" + that.modelName,
+      data: data || {}
+    });
+    return this.__mountData(APIdata);
+  };
+
+  Share.prototype.__getInfo = function() {
+    var data, that;
+    that = this;
+    data = this.__apiReq({
+      url: that.modelName + "/" + that.objectId
+    });
+    return this.__mountData(data);
+  };
+
+  Share.prototype.update = function(data) {
+    var APIdata, that;
+    if (data == null) {
+      data = {};
+    }
+    that = this;
+    APIdata = this.__apiReq({
+      method: 'PUT',
+      url: that.modelName + "/" + that.objectId,
+      data: data
+    });
+    return this.__mountData(APIdata);
   };
 
   Share.prototype.help = function() {

@@ -1,10 +1,33 @@
 # Share ->> ownerId:string helper:[string] status:
 class @Share extends APIModel
-    constractor: (@objectId = "") ->
+    constructor: (@objectId = "") ->
         @modelName = "Share"
         if @objectId.length > 1
             @__getInfo()
         return
+
+    create: (data) ->
+        console.log @modelName
+        that = this
+        APIdata = @__apiReq
+            method: 'POST'
+            url: "#{that.modelName}"
+            data: data || {}
+        @__mountData APIdata
+
+    __getInfo: ->
+        that = this
+        data = @__apiReq
+            url: "#{that.modelName}/#{that.objectId}"
+        @__mountData data
+
+    update: (data = {}) ->
+        that = this
+        APIdata = @__apiReq
+            method: 'PUT'
+            url: "#{that.modelName}/#{that.objectId}"
+            data: data
+        @__mountData APIdata
 
     help: ->
         @update

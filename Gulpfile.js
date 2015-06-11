@@ -4,7 +4,8 @@ var gulp         = require('gulp'),
     minifycss    = require('gulp-minify-css'),
     jshint       = require('gulp-jshint'),
     uglify       = require('gulp-uglify'),
-    //imagemin   = require('gulp-imagemin'),
+    imagemin     = require('gulp-imagemin'),
+    pngquant     = require('imagemin-pngquant'),
     rename       = require('gulp-rename'),
     concat       = require('gulp-concat'),
     notify       = require('gulp-notify'),
@@ -51,7 +52,7 @@ gulp.task('css', function() {
 gulp.task('coffee', function() {
   gulp.src('./src/javascripts/*.coffee')
     .pipe(coffee({bare: true}).on('error', console.log))
-    //.pipe(jshint('.jshintrc'))
+    .pipe(jshint('.jshintrc'))
     //.pipe(jshint.reporter('default'))
     .pipe(concat('z_server.js'))
     .pipe(gulp.dest('public/assets/js'))
@@ -92,6 +93,10 @@ gulp.task('html', function () {
 
 gulp.task('image', function() {
   gulp.src('./src/images/**')
+      .pipe(imagemin({
+                progressive: true,
+                use: [pngquant()]
+            }))
     .pipe(gulp.dest('public/assets/images'))
     .pipe(notify({ message: 'Images task complete' }));
 })
