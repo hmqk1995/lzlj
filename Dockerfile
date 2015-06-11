@@ -6,5 +6,6 @@ RUN apt-get install -y nginx git-core
 RUN mkdir -pv /var/www
 ADD ./ /var/www/lzlj
 ADD ./nginx.conf /etc/nginx/con.d/lzlj.conf
+RUN mkdir -pv /var/www/lzlj/log
 RUN service nginx restart
 EXPOSE 80
