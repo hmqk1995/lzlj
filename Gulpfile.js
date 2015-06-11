@@ -81,6 +81,12 @@ gulp.task('slim', function () {
     .pipe(notify({ message: 'Slim task complete' }));
 })
 
+gulp.task('html', function () {
+  gulp.src('./src/views/*.html')
+    .pipe(gulp.dest('public/'))
+    .pipe(notify({ message: 'HTML task complete' }));
+})
+
 gulp.task('image', function() {
   gulp.src('./src/images/**')
     .pipe(gulp.dest('public/assets/images'))
@@ -148,7 +154,7 @@ gulp.task('build', ['generate'], function() {
 });
 // Server Doen ======================================
 
-gulp.task('generate', ['image', 'scss', 'css', 'coffee', 'js', 'slim', 'data', 'bundle'])
+gulp.task('generate', ['image', 'scss', 'css', 'coffee', 'js', 'slim', 'data', 'bundle', 'html'])
 gulp.task('clean', function(cb) {
     del(['public/assets/css/*.css', 'public/assets/css/*.map', 'public/assets/js'], cb)
 });
@@ -175,5 +181,6 @@ gulp.task('watch', function() {
 
     // Watch .slim files
     gulp.watch('src/views/*.slim', ['slim']);
+    gulp.watch('src/views/*.html', ['html']);
 
 });

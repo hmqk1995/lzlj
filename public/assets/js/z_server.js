@@ -98,7 +98,7 @@ this.Share = (function(superClass) {
     }));
   };
 
-  Share.prototype.addHelper = function(helperId) {
+  Share.prototype.helpd = function() {
     var data, result;
     data = {
       helper: {

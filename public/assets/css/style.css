@@ -1,0 +1,353 @@
+/* Created by Luke on June 2nd , 2015 */
+/*****************************
+		---  Reset  ---
+*****************************/
+
+html,body,p,h1,h2,h3,h4,h5,h6,div {
+	margin: 0;
+	padding: 0;
+}
+
+html,body {
+	width: 100%;
+	height: 100%;
+}
+
+/*****************************
+		---  Animation  ---
+*****************************/
+
+@-webkit-keyframes moveupanddown {
+  0% {
+    -webkit-transform: translate3d(8px, 8px, 0);
+    transform: translate3d(8px, 8px, 0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes moveupanddown {
+  0% {
+    -webkit-transform: translate3d(8px, 8px, 0);
+    transform: translate3d(8px, 8px, 0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+}
+
+.moveupanddown {
+  -webkit-animation-name: moveupanddown;
+  animation-name: moveupanddown;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  animation-timing-function: linear;
+  animation-timing-function: linear;
+}
+
+@-webkit-keyframes moveupanddown2 {
+  0% {
+    -webkit-transform: translate3d(0, 8px, 0);
+    transform: translate3d(0, 8px, 0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes moveupanddown2 {
+  0% {
+    -webkit-transform: translate3d(0, 8px, 0);
+    transform: translate3d(0, 8px, 0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+}
+
+.moveupanddown2 {
+  -webkit-animation-name: moveupanddown2;
+  animation-name: moveupanddown2;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+}
+
+/*****************************
+		---  Main  ---
+*****************************/
+
+#container {
+	width: 100%;
+	height: 100%;
+	background: url('../images/bg2.png') #fddd00 no-repeat;
+	background-size: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+.img_area {
+	position: absolute;
+}
+
+	/* 名牌为1 人为2 酒为3 导航为4 左商标为5 右商标为6*/
+#img_area_1 {
+	width: 78%;
+	height: 100%;
+	background: url('../images/bar.png') no-repeat;
+	background-size: 100%;
+	left: 10%;
+	top: 1%;
+}
+
+#img_area_2 {
+	width: 76%;
+	height: 100%;
+	background: url('../images/people.png') no-repeat;
+	background-size: 100%;
+	left: 0;
+	top: 22%;
+}
+
+#img_area_3 {
+	width: 80%;
+	height: 250px;
+	background: url('../images/bottle.png') no-repeat;
+	background-size: 100%;
+	left: 0;
+	top: 65%;
+}
+
+#img_area_4 {
+	width: 100px;
+	height: 380px;
+	background: url('../images/guide2.png') no-repeat;
+	background-size: 100%;
+	right: 0;
+	bottom: -25px;
+}
+
+#img_area_5 {
+	width: 25px;
+	height: 115px;
+	background: url('../images/brand.png') no-repeat;
+	background-size: 100%;
+	left: 10px;
+	top: 10%;
+	z-index: 2000;
+}
+
+#img_area_6 {
+	width: 50px;
+	height: 115px;
+	background: url('../images/brand2.png') no-repeat;
+	background-size: 100%;
+	right: 20px;
+	top: 10%;
+	z-index: 2000;
+}
+
+/*****************************
+		---  按钮部分  ---
+*****************************/
+#start {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	height: 70px;
+}
+
+#score {
+	position: absolute;
+	width: 100%;
+	top: 70px;
+	height: 60px;
+}
+
+#rule {
+	position: absolute;
+	width: 100%;
+	top: 130px;
+	height: 60px;
+}
+
+#desc {
+	position: absolute;
+	width: 100%;
+	top: 190px;
+	height: 60px;
+}
+
+.mask {
+	display: none;
+	opacity: 0.51;
+}
+
+/*****************************
+		---  game.html  ---
+*****************************/
+.game_container {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	background: url('../images/game_arr.png') #fcd700 center top;
+	background-size: 95px;
+}
+
+#game_bs {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+#game_cloud {
+	position: absolute;
+	bottom: 100px;
+	right: 0;
+	width: 38%;
+}
+
+.game_bar {
+	left: 50%;
+	top: 40px;
+	position: absolute;
+}
+
+#game_bar2 {
+	margin-left: -40%;
+	width: 80%;
+	height: 40px;
+}
+
+#game_bar2_b {
+	margin-left: -37%;
+	margin-top: 8px;
+	background: url('../images/game_bar2_b.png');
+	background-size: auto 20px;
+	width: 73%;
+	height: 20px;
+	border: 2px solid #07323f;
+	border-radius: 100px;
+}
+
+#bottle_container {
+	position: absolute;
+	width: 50%;
+	height: 40%;
+	left: 0;
+	top: 100px;
+}
+
+#img_area_game_2 {
+	width: 80%;
+	margin-left: -43%;
+	height: 100%;
+	background: url('../images/game2_win.png') no-repeat;
+	background-size: 100%;
+	left: 50%;
+	top: 100px;
+}
+
+/*****************************
+	---   game2.html  ---
+*****************************/
+#game2_container {overflow: hidden;}
+#game2_wrapper {opacity: 0;}
+/* 1为lantern 2为win 3为bottle 4为button 5为friend 6为ads 7为brand*/
+#img_area_game2_1 {
+	width: 15%;
+	height: 100%;
+	background: url('../images/game2_lantern.png') no-repeat;
+	background-size: 100%;
+	right: -6px;
+	top: -20px;
+}
+
+#img_area_game2_2 {
+	width: 60%;
+	margin-left: -32%;
+	height: 100%;
+	background: url('../images/game2_win.png') no-repeat;
+	background-size: 100%;
+	left: 50%;
+	top: 10px;
+	display: none;
+}
+
+#img_area_game2_3 {
+	width: 60%;
+	margin-left: -30%;
+	height: 100%;
+	background: url('../images/game2_bottle.png') no-repeat;
+	background-size: 100%;
+	left: 50%;
+	top: 40px;
+}
+
+#img_area_game2_4 {
+	width: 60%;
+	margin-left: -30%;
+	left: 50%;
+	bottom: 40px;
+}
+
+#img_area_game2_5 {
+	width: 76%;
+	margin-left: -38%;
+	left: 50%;
+	bottom: 100px;
+}
+
+#img_area_game2_6 {
+	width: 40%;
+	right: 10px;
+	bottom: 5px;
+}
+
+#img_area_game2_7 {
+	width: 80%;
+	margin-left: -40%;
+	left: 50%;
+	bottom: 175px;
+}
+
+#img_area_game2_8 {
+	width: 28%;
+	left: 24%;
+	bottom: 175px;
+}
+
+
+/*****************************
+    ---  Media Query  ---
+*****************************/
+
+@media (max-width: 320px) {
+	#img_area_4 {
+		width: 90px;
+		bottom: -105px;
+	}
+	#start {height: 70px;} #score {height: 50px;}#rule {top: 120px;height: 50px;}#desc {top: 170px;height: 60px;}
+}
+
+@media (max-height: 460px) {
+	#img_area_4 {
+		bottom: -120px;
+	}
+}
