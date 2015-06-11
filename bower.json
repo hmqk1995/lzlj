@@ -1,0 +1,21 @@
+{
+  "name": "lzlj",
+  "version": "0.0.1",
+  "authors": [
+    "cassiuschen <chzsh1995@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.11.2"
+  },
+  "devDependencies": {
+    "underscore": "~1.8.3"
+  }
+}
