@@ -9,7 +9,7 @@ ADD ./ /var/www/lzlj
 ADD ./nginx.conf /etc/nginx/con.d/lzlj.conf
 RUN mkdir -pv /var/www/lzlj/log
 RUN echo "Nginx Log" > /var/www/lzlj/log/nginx.access.log
-RUN service nginx restart
+RUN service nginx stop
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/lzlj"]
 WORKDIR /var/www/lzlj
 EXPOSE 80
