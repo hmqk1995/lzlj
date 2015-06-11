@@ -102,6 +102,14 @@ html,body {
 	overflow: hidden;
 }
 
+#loading_img {
+	position: absolute;
+	left: 50%;
+	margin-left: -60px;
+	top: 50%;
+	margin-top: -60px;
+}
+
 .img_area {
 	position: absolute;
 }
