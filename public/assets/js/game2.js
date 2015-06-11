@@ -25,7 +25,7 @@ $(document).ready(function() {
 	$('#img_area_game2_7').live('swipeRight', function(){
 		$('#img_area_game2_7').addClass('animated hinge');
 		setTimeout(function(){
-			location.href = 'giftdemo.html';
+			location.replace('giftdemo.html');
 		}, 1500);
 	});
 });

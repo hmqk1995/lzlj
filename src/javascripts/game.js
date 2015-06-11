@@ -29,7 +29,7 @@ $(document).ready(function(){
 					$("#game_cloud").removeClass();
 					$("#game_container").children().addClass('animated fadeOut');
 				}, 600);
-				setTimeout(function(){location.href = 'game2.html';}, 3000);
+				setTimeout(function(){location.replace('game2.html');}, 3000);
 				
 			});
 			setTimeout(function () {
