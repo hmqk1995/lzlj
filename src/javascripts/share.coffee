@@ -3,7 +3,7 @@ class @Share extends APIModel
     constractor: (@objectId = "") ->
         @modelName = "Share"
         if @objectId.length > 1
-            @__mountData @__getInfo()
+            @__getInfo()
         return
 
 

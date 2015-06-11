@@ -38,28 +38,28 @@ this.APIModel = (function() {
     if (data == null) {
       data = {};
     }
-    return this.__apiReq({
+    return this.__mountData(this.__apiReq({
       method: 'POST',
       url: "" + this.modelName,
       data: data
-    });
+    }));
   };
 
   APIModel.prototype.__getInfo = function() {
-    return this.__apiReq({
+    return this.__mountData(this.__apiReq({
       url: this.modelName + "/" + this.objectId
-    });
+    }));
   };
 
   APIModel.prototype.update = function(data) {
     if (data == null) {
       data = {};
     }
-    return this.__apiReq({
+    return this.__mountData(this.__apiReq({
       method: 'PUT',
       url: this.modelName + "/" + this.objectId,
       data: data
-    });
+    }));
   };
 
   APIModel.prototype.__apiReq = function(set) {
@@ -94,6 +94,7 @@ this.APIModel = (function() {
   APIModel.prototype.__mountData = function(data) {
     var that;
     that = this;
+    console.log("Mount data!");
     _.mapObject(data, function(k, v) {
       return that[k] = v;
     });
@@ -117,7 +118,7 @@ this.Share = (function(superClass) {
     this.objectId = objectId != null ? objectId : "";
     this.modelName = "Share";
     if (this.objectId.length > 1) {
-      this.__mountData(this.__getInfo());
+      this.__getInfo();
     }
   };
 

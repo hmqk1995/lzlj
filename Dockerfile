@@ -7,3 +7,4 @@ RUN mkdir -pv /var/www
 ADD ./ /var/www/lzlj
 ADD ./nginx.conf /etc/nginx/con.d/lzlj.conf
 RUN service nginx restart
+EXPOSE 80

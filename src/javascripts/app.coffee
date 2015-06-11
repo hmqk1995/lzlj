@@ -25,17 +25,17 @@ API_URL = "https://leancloud.cn/1.1/classes"
 
 class @APIModel
     create: (data = {}) ->
-        @__apiReq
+        @__mountData @__apiReq
             method: 'POST'
             url: "#{@modelName}"
             data: data
 
     __getInfo: ->
-        @__apiReq
+        @__mountData @__apiReq
             url: "#{@modelName}/#{@objectId}"
 
     update: (data = {}) ->
-        @__apiReq
+        @__mountData @__apiReq
             method: 'PUT'
             url: "#{@modelName}/#{@objectId}"
             data: data
@@ -58,6 +58,7 @@ class @APIModel
 
     __mountData: (data) ->
         that = this
+        console.log "Mount data!"
         _.mapObject data, (k,v) ->
             that[k] = v
         return
