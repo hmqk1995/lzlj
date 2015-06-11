@@ -94,9 +94,9 @@ gulp.task('html', function () {
 gulp.task('image', function() {
   gulp.src('./src/images/**')
     //.pipe(imagemin({
-                progressive: true,
-                use: [pngquant()]
-            }))
+    //            progressive: true,
+    //           use: [pngquant()]
+    //        }))
     .pipe(gulp.dest('public/assets/images'))
     .pipe(notify({ message: 'Images task complete' }));
 })
