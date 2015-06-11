@@ -122,7 +122,26 @@ this.Share = (function(superClass) {
     }
   };
 
-  Share.prototype.share = function() {};
+  Share.prototype.help = function() {
+    this.update({
+      helper: this.helper + 1
+    });
+    return true;
+  };
+
+  Share.prototype.status = function() {
+    var ref;
+    return (ref = this.helper >= 2) != null ? ref : {
+      "true": false
+    };
+  };
+
+  Share.prototype.left = function() {
+    var ref;
+    return (ref = this.helper >= 2) != null ? ref : {
+      0: 2 - this.helper
+    };
+  };
 
   return Share;
 

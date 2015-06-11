@@ -7,5 +7,6 @@ RUN mkdir -pv /var/www
 ADD ./ /var/www/lzlj
 ADD ./nginx.conf /etc/nginx/con.d/lzlj.conf
 RUN mkdir -pv /var/www/lzlj/log
+RUN echo "Nginx Log" > /var/www/lzlj/log/nginx.access.log
 RUN service nginx restart
 EXPOSE 80

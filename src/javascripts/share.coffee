@@ -6,6 +6,13 @@ class @Share extends APIModel
             @__getInfo()
         return
 
+    help: ->
+        @update
+            helper: @helper + 1
+        return true
 
-    share: () ->
-        return
+    status: ->
+        return (@helper >= 2 ? true : false)
+
+    left: ->
+        return (@helper >=2 ? 0 : 2 - @helper)
