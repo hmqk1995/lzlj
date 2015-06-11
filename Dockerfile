@@ -6,4 +6,4 @@ RUN apt-get install -y nginx git-core
 RUN mkdir -pv /var/www
 ADD ./ /var/www/lzlj
 ADD ./nginx.conf /etc/nginx/con.d/lzlj.conf
-RUN server nginx restart
+RUN service nginx restart
