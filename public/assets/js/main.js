@@ -1,19 +1,22 @@
+var share;
+var firstIn = false;
 $(document).ready(function(){
 	//统计
 	App.analyse("test", "index");
 	//cookie判断
 		//读取单个cookie
-		//var lzlj_id = Cookie.get('lzlj_id'); 备注：获取不到会返回空字符串
-		//var firstIn = false;
-		//if(!lzlj_id)
-			//var share = new Share("value of lzlj_id");
-			//shareId = share.objectId;
-		//else
-			//var share = new Share();
-			//share.create({"host": 0(这里稍后做判断)});
-			//shareId = share.objectId;
-			//Cookie.set('lzlj_id', shareId);
-			//firstIn = true;
+		var lzlj_id = Cookie.read('lzlj_id'); //备注：获取不到会返回空字符串
+		
+		if(lzlj_id == "" || lzlj_id == undefined) {
+			share = new Share();
+			share.create({'host': 0});
+			var shareId = share.objectId;
+			Cookie.set('lzlj_id', shareId);
+			firstIn = true;
+		} else {
+			share = new Share(lzlj_id);
+			var shareId = share.objectId;
+		}
 
 	//为按钮增加事件处理程序
 	(function(){
@@ -96,19 +99,22 @@ $(document).ready(function(){
 		});
 		//战绩按钮
 		$('#score').on('tap', function(){
+			console.log(firstIn);
 			// 判断是否为第一次进入游戏，若不是则进入网站优惠券页面
-			// if (firstIn == true) {
-			showMask();
-			addButtonListener();
-			var imgSrc = '<img src="/assets/images/togetpride.png" alt="" style="width:160px;position:absolute;top:60%;left:50%;margin-left:-75px;margin-top:-120px;"/>';
-			$('#panel_list')[0].innerHTML += imgSrc;
-			//} else {
-				// switch (share.host)
-					//case 0:
-					 //location.href = "酒仙网";
-					//case 1:
-					 //location.href = "三人炫"; 
-			//}
+			if (firstIn == true) {
+				showMask();
+				addButtonListener();
+				var imgSrc = '<img src="/assets/images/togetpride.png" alt="" style="width:160px;position:absolute;top:60%;left:50%;margin-left:-75px;margin-top:-120px;"/>';
+				$('#panel_list')[0].innerHTML += imgSrc;
+			} //else {
+			// 	switch (share.host)
+			// 		case 0:
+			// 		 location.href = "酒仙网";
+			// 		 break;
+			// 		case 1:
+			// 		 location.href = "三人炫"; 
+			// 		 break;
+			// }
 		});
 		//开始按钮
 		$('#start').on('tap', function(){

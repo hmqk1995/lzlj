@@ -308,7 +308,7 @@ html,body {
 	top: 40px;
 }
 
-#img_area_game2_4 {
+#img_area_game2_4, #img_area_game2_9 {
 	width: 60%;
 	margin-left: -30%;
 	left: 50%;
@@ -339,6 +339,13 @@ html,body {
 	width: 28%;
 	left: 24%;
 	bottom: 175px;
+}
+
+#img_area_game2_10 {
+	width: 80%;
+	margin-left: -40%;
+	left: 50%;
+	bottom: 105px;
 }
 
 
