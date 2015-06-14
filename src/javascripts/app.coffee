@@ -51,20 +51,80 @@ window.App =
         else
             host = "LuZhouLaoJiao"
         return host
+(->
+    pluses = /\+/g
+
+    encode = (s) ->
+        encodeURIComponent s
+
+    decode = (s) ->
+        decodeURIComponent s
+
+    stringifyCookieValue = (value) ->
+        console.log value
+        String value
+
+    parseCookieValue = (s) ->
+        if s.indexOf('"') == 0
+            s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\')
+
+        try
+            s = decodeURIComponent(s.replace(pluses, ' '))
+            return s
+        catch e
+            console.log e
+
+    read = (s) ->
+        value = parseCookieValue s
+        value
+
+    window.App.cookie = (key, value) ->
+        if arguments.length > 1 && !_.isFunction(value)
+            return document.cookie = [encode(key), '=', stringifyCookieValue(value)].join('')
+
+        if key
+            result = undefined
+        else
+            result = {}
+        cookies = document.cookie.split '; '
+
+        for cookie in cookies
+            parts = cookie.split '='
+            name = decode parts.shift()
+            thisCookie = parts.join '='
+
+            if key == name
+                result = read thisCookie
+                result = undefined if result.length == 0
+                break
+
+            if !key
+                result[name] = read(thisCookie) || undefined
+
+        return result
+
+    window.App.removeCookie = (key) ->
+        window.App.cookie key, ''
+        return !window.App.cookie key
+).call()
+
 
 
 window.Cookie = 
     set: (target, value) ->
-        $.cookie(target, value)
+        App.cookie(target, value)
 
     read: (target) ->
-        $.cookie target
+        App.cookie target
 
     delete: (target) ->
-        $.removeCookie target
+        App.removeCookie target
 
     info: ->
-        $.cookie()
+        App.cookie()
+
+        
+
 
 API_URL = "https://leancloud.cn/1.1/classes"
 ANALYSE_URL = "https://api.leancloud.cn/1.1/stats/open/collect"

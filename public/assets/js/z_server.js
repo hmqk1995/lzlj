@@ -67,18 +67,84 @@ window.App = {
   }
 };
 
+(function() {
+  var decode, encode, parseCookieValue, pluses, read, stringifyCookieValue;
+  pluses = /\+/g;
+  encode = function(s) {
+    return encodeURIComponent(s);
+  };
+  decode = function(s) {
+    return decodeURIComponent(s);
+  };
+  stringifyCookieValue = function(value) {
+    console.log(value);
+    return String(value);
+  };
+  parseCookieValue = function(s) {
+    var e;
+    if (s.indexOf('"') === 0) {
+      s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+    }
+    try {
+      s = decodeURIComponent(s.replace(pluses, ' '));
+      return s;
+    } catch (_error) {
+      e = _error;
+      return console.log(e);
+    }
+  };
+  read = function(s) {
+    var value;
+    value = parseCookieValue(s);
+    return value;
+  };
+  window.App.cookie = function(key, value) {
+    var cookie, cookies, i, len, name, parts, result, thisCookie;
+    if (arguments.length > 1 && !_.isFunction(value)) {
+      return document.cookie = [encode(key), '=', stringifyCookieValue(value)].join('');
+    }
+    if (key) {
+      result = void 0;
+    } else {
+      result = {};
+    }
+    cookies = document.cookie.split('; ');
+    for (i = 0, len = cookies.length; i < len; i++) {
+      cookie = cookies[i];
+      parts = cookie.split('=');
+      name = decode(parts.shift());
+      thisCookie = parts.join('=');
+      if (key === name) {
+        result = read(thisCookie);
+        if (result.length === 0) {
+          result = void 0;
+        }
+        break;
+      }
+      if (!key) {
+        result[name] = read(thisCookie) || void 0;
+      }
+    }
+    return result;
+  };
+  return window.App.removeCookie = function(key) {
+    window.App.cookie(key, '');
+    return !window.App.cookie(key);
+  };
+}).call();
+
 window.Cookie = {
   set: function(target, value) {
-    return $.cookie(target, value);
+    return App.cookie(target, value);
   },
   read: function(target) {
-    return $.cookie(target);
+    return App.cookie(target);
   },
   "delete": function(target) {
-    return $.removeCookie(target);
+    return App.removeCookie(target);
   },
   info: function() {
-    return $.cookie();
+    return App.cookie();
   }
 };
 
