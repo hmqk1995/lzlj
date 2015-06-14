@@ -52,7 +52,7 @@ $(document).ready(function(){
 			$('#mask2').show();
 			var game_container = document.getElementById('game_container');
 			$('#lose').show();
-			$('#lose').on('tap', function(){
+			$('#lose').click(function(){
 				history.back();
 			});
 		}

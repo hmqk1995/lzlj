@@ -130,7 +130,7 @@ $(document).ready(function(){
 	}
 	//加载完成，显示页面
 	setTimeout(function(){
-		$("#loading_img").remove();
+		$("#loading_img_mask").remove();
 		start();
 		playMusic();
 	}, 4000);
