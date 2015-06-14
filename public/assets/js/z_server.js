@@ -361,7 +361,7 @@ this.Share = (function(superClass) {
 
   Share.prototype.getTicket = function(domain) {
     var getType, that, ticket, type;
-    ticket = new Ticket;
+    ticket = new Ticket(domain);
     that = this;
     if (this.ticketType) {
       ticket.getByType(that.ticketType);

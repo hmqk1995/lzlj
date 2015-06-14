@@ -102,7 +102,7 @@ class @Share extends APIModel
         return (@helper >=2 ? 0 : 2 - @helper)
 
     getTicket: (domain) ->
-        ticket = new Ticket
+        ticket = new Ticket(domain)
         that = this
 
         if @ticketType
