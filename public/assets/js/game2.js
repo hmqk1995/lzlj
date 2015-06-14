@@ -2,31 +2,32 @@ $(document).ready(function() {
 	App.analyse("test", "game2");
 	//解决安卓的swipe失效问题
 	$('body').bind("touchmove", function(e) {e.preventDefault();});
-
-	// var hashId = location.hash;
-	// if (hashId == '') {location.href='index.html'} 如果没有hashId自动跳转到首页
+/*
+	var hashId = window.location.hash;
+	if (hashId.length === 0) {window.location.href='index.html';} //如果没有hashId自动跳转到首页
 	//读取单个cookie
-	//var lzlj_id = Cookie.get('lzlj_id');
-	//if (lzlj_id == '' || lzlj_id == undefined || lzlj_id != hashId) {
+	var lzlj_id = Cookie.get('lzlj_id');
+*/
+	if (lzlj_id == '' || lzlj_id == undefined || lzlj_id != hashId) {
 		// 创建share对象
-		// var share = new Share(hashId);
+		var share = new Share(hashId);
 		//显示 帮别人撕的页面
 		//文字 “帮他撕”
-			//$("#img_area_game2_10").show();
+			$("#img_area_game2_10").show();
 		//按钮 “我也要撕”
-			// $('#img_area_game2_9').show();
+			$('#img_area_game2_9').show();
 			//名牌事件处理程序
 			$('#img_area_game2_7').one('swipeRight', function toHelp(){
 				// 撕并返回是否成功
-				// var helpSucceed = share.help();
-				// if (helpSucceed == true) {
+				var helpSucceed = share.help();
+				if (helpSucceed == true) {
 					$('#img_area_game2_7').addClass('animated hinge');
 					setTimeout(function(){
-						// location.replace('giftdemo.html');
+						window.location.replace('giftdemo.html');
 					}, 1500);
-				//} else {
-					//$('#img_area_game2_7').one('swipeRight', toHelp);
-				//}
+				} else {
+					$('#img_area_game2_7').one('swipeRight', toHelp);
+				}
 				//返回帮助数量	
 					// switch (share.helper) {
 					// 	case share.helper >= 2 :

@@ -1,4 +1,4 @@
-var share;
+var share,shareId;
 var firstIn = false;
 $(document).ready(function(){
 	//统计
@@ -10,12 +10,12 @@ $(document).ready(function(){
 		if(lzlj_id == "" || lzlj_id == undefined) {
 			share = new Share();
 			share.create({'host': 0});
-			var shareId = share.objectId;
+			shareId = share.objectId;
 			Cookie.set('lzlj_id', shareId);
 			firstIn = true;
 		} else {
 			share = new Share(lzlj_id);
-			var shareId = share.objectId;
+			shareId = share.objectId;
 		}
 
 	//为按钮增加事件处理程序
@@ -106,23 +106,25 @@ $(document).ready(function(){
 				addButtonListener();
 				var imgSrc = '<img src="/assets/images/togetpride.png" alt="" style="width:160px;position:absolute;top:60%;left:50%;margin-left:-75px;margin-top:-120px;"/>';
 				$('#panel_list')[0].innerHTML += imgSrc;
-			} //else {
-			// 	switch (share.host)
-			// 		case 0:
-			// 		 location.href = "酒仙网";
-			// 		 break;
-			// 		case 1:
-			// 		 location.href = "三人炫"; 
-			// 		 break;
-			// }
+			} else {
+				var s = share.host;
+				// switch (s)
+				// 	case 0:
+				// 	 location.href = '1.html';
+				// 	 break;
+				// 	case 1:
+				// 	 location.href = '2.html'; 
+				// 	 break;
+			}
 		});
 		//开始按钮
 		$('#start').on('tap', function(){
-			// if (share.helper == 0)
-			  //location.hash = shareId;
+			if (share.helper == 0) {
+			  location.hash = shareId;
 			  location.href ='game.html' + location.hash;
-			// else 
-			// location.href = 'game2.html' + location.hash;
+			} else {
+			  location.href = 'game2.html' + location.hash;
+			}
 		});
 	}());
 
