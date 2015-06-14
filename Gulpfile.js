@@ -106,6 +106,7 @@ gulp.task('image', function() {
 var libs = {
     js: [
         "bower_components/0-zepto.min.js",
+        "bower_components/jquery-cookie/jquery.cookie.js",
         "bower_components/underscore/underscore.min.js"
     ],
     css: [

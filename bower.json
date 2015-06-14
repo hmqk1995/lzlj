@@ -14,7 +14,8 @@
   ],
   "dependencies": {
     "jquery": "1.11.2",
-    "hammerjs": "~2.0.4"
+    "hammerjs": "~2.0.4",
+    "jquery-cookie": "~1.4.1"
   },
   "devDependencies": {
     "underscore": "~1.8.3"

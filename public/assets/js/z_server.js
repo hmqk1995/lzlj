@@ -67,6 +67,21 @@ window.App = {
   }
 };
 
+window.Cookie = {
+  set: function(target, value) {
+    return $.cookie(target, value);
+  },
+  read: function(target) {
+    return $.cookie(target);
+  },
+  "delete": function(target) {
+    return $.removeCookie(target);
+  },
+  info: function() {
+    return $.cookie();
+  }
+};
+
 API_URL = "https://leancloud.cn/1.1/classes";
 
 ANALYSE_URL = "https://api.leancloud.cn/1.1/stats/open/collect";
