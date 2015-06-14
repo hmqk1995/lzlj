@@ -132,5 +132,13 @@ $(document).ready(function(){
 	setTimeout(function(){
 		$("#loading_img").remove();
 		start();
+		playMusic();
 	}, 4000);
+
+	// 音乐播放
+	function playMusic() {
+	    var audio = document.getElementById('audio');
+	    audio.play();
+	    audio.loop = true;
+	}
 });

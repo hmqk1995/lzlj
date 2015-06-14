@@ -50,10 +50,18 @@ $(document).ready(function(){
 			clearInterval(changeInterval);
 			$('#mask2').show();
 			var game_container = document.getElementById('game_container');
-			game_container.innerHTML += '<img id="lose" src="/assets/images/lose.png" alt="" style="width:75%;left:50%;margin-left:-37.5%;top:30%;position:absolute;z-index:999;" />';
+			$('#lose').show();
 			$('#lose').on('tap', function(){
 				history.back();
 			});
 		}
 	}, 100);
+
+	// 音乐播放
+	function playMusic() {
+	    var audio = document.getElementById('audio');
+	    audio.play();
+	    audio.loop = true;
+	}
+	playMusic();
 });
