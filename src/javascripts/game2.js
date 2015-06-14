@@ -65,8 +65,9 @@ $(document).ready(function() {
 				if (fNumber > 2) {
 					alert('恭喜！已经有两位好友帮你撕了名牌！你可以获得奖品！');
 					location.replace('giftdemo.html');
+					return;
 				}
-				return;
+				
 			}
 			alert('你撕下了一张名牌，还需要两位朋友帮忙就能获得大礼！分享到朋友圈让他们来帮忙！');
 			Cookie.set('hasGame', 'true');
