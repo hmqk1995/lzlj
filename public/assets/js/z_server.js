@@ -198,8 +198,85 @@ this.APIModel = (function() {
 
 })();
 
-var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+var TICKET_ID,
+  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
+
+TICKET_ID = {
+  JXWTicket: {
+    0: "557dd65ae4b0bd33aa27a809",
+    1: "557dd6b6e4b0bd33aa27a90a",
+    2: "557dd6ebe4b0bd33aa27a9af",
+    3: "557dd712e4b0bd33aa27aa2b",
+    4: "557dd723e4b0bd33aa27aa60"
+  },
+  SRXTicket: {
+    0: "557dd7d5e4b0bd33aa27ac29",
+    1: "557dd6b6e4b0bd33aa27ac52",
+    2: "557dd7f7e4b0bd33aa27ac89",
+    3: "557dd712e4b0bd33aa27ace7",
+    4: "557dd723e4b0bd33aa27ad28"
+  }
+};
+
+this.Ticket = (function(superClass) {
+  extend(Ticket, superClass);
+
+  function Ticket(domain) {
+    if (domain === 'jxw') {
+      this.modelName = "JXWTicket";
+    } else {
+      this.modelName = "SRXTicket";
+    }
+    return;
+  }
+
+  Ticket.prototype.getByType = function(type) {
+    var data, id, that;
+    id = TICKET_ID[this.modelName][type];
+    that = this;
+    data = this.__apiReq({
+      method: 'GET',
+      url: that.modelName + "/" + id
+    });
+    this.__mountData(data);
+    return this.times > 0;
+  };
+
+  Ticket.prototype.update = function(data) {
+    var APIdata, that;
+    if (data == null) {
+      data = {};
+    }
+    that = this;
+    APIdata = this.__apiReq({
+      method: 'PUT',
+      url: that.modelName + "/" + that.objectId,
+      data: data
+    });
+    return this.__getInfo();
+  };
+
+  Ticket.prototype.use = function() {
+    this.update({
+      times: this.times - 1
+    });
+    this.__getInfo();
+    return true;
+  };
+
+  Ticket.prototype.__getInfo = function() {
+    var data, that;
+    that = this;
+    data = this.__apiReq({
+      url: that.modelName + "/" + that.objectId
+    });
+    return this.__mountData(data);
+  };
+
+  return Ticket;
+
+})(APIModel);
 
 this.Share = (function(superClass) {
   extend(Share, superClass);
@@ -260,6 +337,14 @@ this.Share = (function(superClass) {
     return true;
   };
 
+  Share.prototype.setTicketType = function(type) {
+    this.update({
+      ticketType: type
+    });
+    this.__getInfo();
+    return true;
+  };
+
   Share.prototype.status = function() {
     var ref;
     return (ref = this.helper >= 2) != null ? ref : {
@@ -272,6 +357,44 @@ this.Share = (function(superClass) {
     return (ref = this.helper >= 2) != null ? ref : {
       0: 2 - this.helper
     };
+  };
+
+  Share.prototype.getTicket = function(domain) {
+    var getType, that, ticket, type;
+    ticket = new Ticket;
+    that = this;
+    if (this.ticketType) {
+      ticket.getByType(that.ticketType);
+    } else {
+      getType = function() {
+        var result, seed, type;
+        seed = Math.random * _.now();
+        result = seed % 250000;
+        type = (function() {
+          switch (false) {
+            case !(result <= 50):
+              return 4;
+            case !(result > 50 && result <= 100):
+              return 3;
+            case !(result > 100 && result <= 4100):
+              return 2;
+            case !(result > 4100 && result <= 14100):
+              return 1;
+            default:
+              return 0;
+          }
+        })();
+        return type;
+      };
+      if (ticket.getByType(type = getType())) {
+        ticket.use();
+        that.setTicketType(type);
+      } else {
+        ticket.getByType(0);
+        that.setTicketType(0);
+      }
+    }
+    return ticket;
   };
 
   return Share;
