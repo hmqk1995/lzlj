@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	App.analyse("test", "game");
+	App.analyse("test", "index");
 	//将图片路径存到数组中
 	var bImg = ['/assets/images/game_b1.png','/assets/images/game_b2.png','/assets/images/game_b3.png'];
 	var bContainer = document.getElementById('bottle_container');
@@ -52,7 +52,7 @@ $(document).ready(function(){
 			$('#mask2').show();
 			var game_container = document.getElementById('game_container');
 			$('#lose').show();
-			$('#lose').click(function(){
+			$('#lose').on('tap', function(){
 				history.back();
 			});
 		}
