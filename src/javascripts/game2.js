@@ -63,7 +63,7 @@ $(document).ready(function() {
 					alert('你已经撕过自己的名牌啦！已经有'+ fNumber +'位朋友帮你撕过名牌。有两位朋友撕了名牌你就能获得奖品！');
 					return;
 				}
-				if (fNumber > 2) {
+				if (fNumber >= 2) {
 					alert('恭喜！已经有两位好友帮你撕了名牌！你可以获得奖品！');
 					location.replace('giftdemo.html');
 					return;
