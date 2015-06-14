@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	App.analyse("test", "game2");
 	//令所有页面img_area_game2元素opacity初始化为0;
 	(function(){
 		setTimeout(function(){$('#game2_wrapper').css('opacity', '1').addClass('animated').addClass('fadeIn')}, 800);
@@ -28,4 +29,12 @@ $(document).ready(function() {
 			location.replace('giftdemo.html');
 		}, 1500);
 	});
+	
+	// 音乐播放
+	function playMusic() {
+	    var audio = document.getElementById('audio');
+	    audio.play();
+	    audio.loop = true;
+	}
+	playMusic();
 });

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+	App.analyse("test", "index");
 	//为按钮增加事件处理程序
 	(function(){
 		function showMask(){
@@ -130,7 +130,15 @@ $(document).ready(function(){
 	}
 	//加载完成，显示页面
 	setTimeout(function(){
-		$("#loading_img").remove();
+		$("#loading_img_mask").remove();
 		start();
+		playMusic();
 	}, 4000);
+
+	// 音乐播放
+	function playMusic() {
+	    var audio = document.getElementById('audio');
+	    audio.play();
+	    audio.loop = true;
+	}
 });

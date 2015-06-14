@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	App.analyse("test", "game");
 	//将图片路径存到数组中
 	var bImg = ['/assets/images/game_b1.png','/assets/images/game_b2.png','/assets/images/game_b3.png'];
 	var bContainer = document.getElementById('bottle_container');
@@ -50,10 +51,18 @@ $(document).ready(function(){
 			clearInterval(changeInterval);
 			$('#mask2').show();
 			var game_container = document.getElementById('game_container');
-			game_container.innerHTML += '<img id="lose" src="/assets/images/lose.png" alt="" style="width:75%;left:50%;margin-left:-37.5%;top:30%;position:absolute;z-index:999;" />';
-			$('#lose').on('tap', function(){
+			$('#lose').show();
+			$('#lose').click(function(){
 				history.back();
 			});
 		}
 	}, 100);
+
+	// 音乐播放
+	function playMusic() {
+	    var audio = document.getElementById('audio');
+	    audio.play();
+	    audio.loop = true;
+	}
+	playMusic();
 });
