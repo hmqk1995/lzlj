@@ -65,7 +65,7 @@ $(document).ready(function() {
 				}
 				if (fNumber >= 2) {
 					alert('恭喜！已经有两位好友帮你撕了名牌！你可以获得奖品！');
-					location.replace('giftdemo.html');
+					location.replace('giftdemo.html' + '\#' +lzlj_id);
 					return;
 				}
 				

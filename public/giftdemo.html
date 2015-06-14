@@ -55,5 +55,11 @@
 	<script type="text/javascript" src="/assets/js/0-zepto.min.js"></script>
 	<script type="text/javascript" src="/assets/js/underscore.min.js"></script>
 	<script type="text/javascript" src="/assets/js/z_server.min.js"></script>
+	<script type="text/javascript">
+		if (location.hash.length === 0) {location.href='index.html';} //如果没有hashId自动跳转到首页
+		lzlj_id = Cookie.read('lzlj_id');
+		share = new Share(lzlj_id);
+		share.getTicket();
+	</script>
 </body>
 </html>
