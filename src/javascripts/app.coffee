@@ -12,8 +12,8 @@ window.App =
     channel: ->
         return "test"
 
-    analyse: (channel, pageName) ->
-        id = (Math.rand() * Math.rand()).toString(16)
+    analyse: (platform, pageName) ->
+        id = (Math.random() * Math.random()).toString(16)
         $.ajax
             type: "POST"
             url: "#{ANALYSE_URL}"

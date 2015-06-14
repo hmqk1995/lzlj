@@ -16,9 +16,9 @@ window.App = {
   channel: function() {
     return "test";
   },
-  analyse: function(channel, pageName) {
+  analyse: function(platform, pageName) {
     var id;
-    id = (Math.rand() * Math.rand()).toString(16);
+    id = (Math.random() * Math.random()).toString(16);
     return $.ajax({
       type: "POST",
       url: "" + ANALYSE_URL,
