@@ -55,6 +55,7 @@ $(document).ready(function() {
 		share = new Share(lzlj_id);
 		//显示 自己的页面
 		$('#img_area_game2_7').bind('swipeRight',function(){
+			$('#img_area_game2_7').addClass('animated hinge');
 			var hasGame = Cookie.read('hasGame');
 			if (hasGame == 'true') {
 				var fNumber = share.helper;
