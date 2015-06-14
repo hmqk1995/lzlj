@@ -9,6 +9,37 @@ window.App =
 
     getStatus: ->
 
+    channel: ->
+        return "test"
+
+    analyse: (platform, pageName) ->
+        id = (Math.random() * Math.random()).toString(16)
+        $.ajax
+            type: "POST"
+            url: "#{ANALYSE_URL}"
+            data: JSON.stringify
+                client:
+                    id: id
+                    platform: platform
+                    app_version: 0.7
+                    app_channel: window.App.channel()
+                session:
+                    id: id
+                events: [
+                    {
+                        "event": "_page"
+                        "duration": 100000
+                        "tag": pageName
+                    }
+                ]
+            contentType: "application/json;charset=utf-8"
+            dataType: "json"
+            success: (data, _) ->
+                console.log data
+            headers:
+                "X-AVOSCloud-Application-Id": "tua132u1316bi5opzxm7zjknwaq6qnb2i5rkp3d2h96m18z2"
+                "X-AVOSCloud-Application-Key": "qs35km6zeer3sglasmy6nkcc9zhc4s1cbyu2j7kkskhsr1g4"
+
     init: ->
         window.current = new Share
 
@@ -22,6 +53,7 @@ window.App =
         return host
 
 API_URL = "https://leancloud.cn/1.1/classes"
+ANALYSE_URL = "https://api.leancloud.cn/1.1/stats/open/collect"
 
 class @APIModel
     __apiReq: (set = {method: 'GET', data: {}, params: {}, url: ""}) ->

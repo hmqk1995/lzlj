@@ -1,4 +1,4 @@
-var API_URL;
+var ANALYSE_URL, API_URL;
 
 window.App = {
   params: function() {
@@ -13,6 +13,44 @@ window.App = {
     return result;
   },
   getStatus: function() {},
+  channel: function() {
+    return "test";
+  },
+  analyse: function(platform, pageName) {
+    var id;
+    id = (Math.random() * Math.random()).toString(16);
+    return $.ajax({
+      type: "POST",
+      url: "" + ANALYSE_URL,
+      data: JSON.stringify({
+        client: {
+          id: id,
+          platform: platform,
+          app_version: 0.7,
+          app_channel: window.App.channel()
+        },
+        session: {
+          id: id
+        },
+        events: [
+          {
+            "event": "_page",
+            "duration": 100000,
+            "tag": pageName
+          }
+        ]
+      }),
+      contentType: "application/json;charset=utf-8",
+      dataType: "json",
+      success: function(data, _) {
+        return console.log(data);
+      },
+      headers: {
+        "X-AVOSCloud-Application-Id": "tua132u1316bi5opzxm7zjknwaq6qnb2i5rkp3d2h96m18z2",
+        "X-AVOSCloud-Application-Key": "qs35km6zeer3sglasmy6nkcc9zhc4s1cbyu2j7kkskhsr1g4"
+      }
+    });
+  },
   init: function() {
     return window.current = new Share;
   },
@@ -30,6 +68,8 @@ window.App = {
 };
 
 API_URL = "https://leancloud.cn/1.1/classes";
+
+ANALYSE_URL = "https://api.leancloud.cn/1.1/stats/open/collect";
 
 this.APIModel = (function() {
   function APIModel() {}
@@ -104,7 +144,8 @@ this.Share = (function(superClass) {
       url: "" + that.modelName,
       data: data
     });
-    return this.__mountData(APIdata);
+    this.__mountData(APIdata);
+    return this.__getInfo();
   };
 
   Share.prototype.__getInfo = function() {
@@ -127,13 +168,14 @@ this.Share = (function(superClass) {
       url: that.modelName + "/" + that.objectId,
       data: data
     });
-    return this.__mountData(APIdata);
+    return this.__getInfo();
   };
 
   Share.prototype.help = function() {
     this.update({
       helper: this.helper + 1
     });
+    this.__getInfo();
     return true;
   };
 

@@ -14,6 +14,7 @@ class @Share extends APIModel
             url: "#{that.modelName}"
             data: data
         @__mountData APIdata
+        @__getInfo()
 
     __getInfo: ->
         that = this
@@ -27,11 +28,12 @@ class @Share extends APIModel
             method: 'PUT'
             url: "#{that.modelName}/#{that.objectId}"
             data: data
-        @__mountData APIdata
+        @__getInfo()
 
     help: ->
         @update
             helper: @helper + 1
+        @__getInfo()
         return true
 
     status: ->
