@@ -30,7 +30,7 @@ $(document).ready(function(){
 					$("#game_cloud").removeClass();
 					$("#game_container").children().addClass('animated fadeOut');
 				}, 600);
-				setTimeout(function(){location.replace('game2.html');}, 3000);
+				setTimeout(function(){location.replace('game2.html' + location.hash);}, 3000);
 				
 			});
 			setTimeout(function () {
@@ -61,7 +61,7 @@ $(document).ready(function(){
 	// 音乐播放
 	function playMusic() {
 	    var audio = document.getElementById('audio');
-	    audio.play();
+	    // audio.play();
 	    audio.loop = true;
 	}
 	playMusic();
