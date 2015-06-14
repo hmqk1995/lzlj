@@ -2,12 +2,10 @@ $(document).ready(function() {
 	App.analyse("test", "game2");
 	//解决安卓的swipe失效问题
 	$('body').bind("touchmove", function(e) {e.preventDefault();});
-/*
 	var hashId = window.location.hash;
 	if (hashId.length === 0) {window.location.href='index.html';} //如果没有hashId自动跳转到首页
 	//读取单个cookie
 	var lzlj_id = Cookie.get('lzlj_id');
-*/
 	if (lzlj_id == '' || lzlj_id == undefined || lzlj_id != hashId) {
 		// 创建share对象
 		var share = new Share(hashId);
@@ -41,7 +39,7 @@ $(document).ready(function() {
 					// 		//还有两位
 					// 		break;
 					// }
-			});
+			});}
 	//} else {
 		// 创建share对象
 		// var share = new Share(lzlj_id);
