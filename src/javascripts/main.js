@@ -99,7 +99,6 @@ $(document).ready(function(){
 		});
 		//战绩按钮
 		$('#score').on('tap', function(){
-			console.log(firstIn);
 			// 判断是否为第一次进入游戏，若不是则进入网站优惠券页面
 			if (firstIn == true) {
 				showMask();
@@ -108,13 +107,14 @@ $(document).ready(function(){
 				$('#panel_list')[0].innerHTML += imgSrc;
 			} else {
 				var s = share.host;
-				// switch (s)
-				// 	case 0:
-				// 	 location.href = '1.html';
-				// 	 break;
-				// 	case 1:
-				// 	 location.href = '2.html'; 
-				// 	 break;
+				switch (s)  {
+					case 0:
+					 location.href = 'http://m.jiuxian.com/m_v1/user/bonus_list';
+					 break;
+					case 1:
+					 location.href = 'http://shop1240998.koudaitong.com/v2/showcase'; 
+					 break;
+				}
 			}
 		});
 		//开始按钮
@@ -123,6 +123,7 @@ $(document).ready(function(){
 			  location.hash = shareId;
 			  location.href ='game.html' + location.hash;
 			} else {
+			  location.hash = shareId;
 			  location.href = 'game2.html' + location.hash;
 			}
 		});
