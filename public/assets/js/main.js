@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+	App.analyse("test", "index");
 	//为按钮增加事件处理程序
 	(function(){
 		function showMask(){
