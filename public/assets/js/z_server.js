@@ -67,6 +67,72 @@ window.App = {
   }
 };
 
+(function() {
+  var decode, encode, parseCookieValue, pluses, read, stringifyCookieValue;
+  pluses = /\+/g;
+  encode = function(s) {
+    return encodeURIComponent(s);
+  };
+  decode = function(s) {
+    return decodeURIComponent(s);
+  };
+  stringifyCookieValue = function(value) {
+    console.log(value);
+    return String(value);
+  };
+  parseCookieValue = function(s) {
+    var e;
+    if (s.indexOf('"') === 0) {
+      s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+    }
+    try {
+      s = decodeURIComponent(s.replace(pluses, ' '));
+      return s;
+    } catch (_error) {
+      e = _error;
+      return console.log(e);
+    }
+  };
+  read = function(s) {
+    var value;
+    value = parseCookieValue(s);
+    return value;
+  };
+  window.App.cookie = function(key, value) {
+    var cookie, cookies, i, len, name, parts, result, thisCookie;
+    if (arguments.length > 1 && !_.isFunction(value)) {
+      return document.cookie = [encode(key), '=', stringifyCookieValue(value)].join('');
+    }
+    if (key) {
+      result = void 0;
+    } else {
+      result = {};
+    }
+    cookies = document.cookie.split('; ');
+    for (i = 0, len = cookies.length; i < len; i++) {
+      cookie = cookies[i];
+      parts = cookie.split('=');
+      name = decode(parts.shift());
+      thisCookie = parts.join('=');
+      if (key === name) {
+        result = read(thisCookie);
+        if (result.length === 0) {
+          result = void 0;
+        }
+        break;
+      }
+      if (!key) {
+        result[name] = read(thisCookie) || void 0;
+      }
+    }
+    return result;
+  };
+  return window.App.removeCookie = function(key) {
+    window.App.cookie(key, '');
+    return !window.App.cookie(key);
+  };
+}).call();
+
 window.Cookie = {
   set: function(target, value) {
     return App.cookie(target, value);
@@ -81,70 +147,6 @@ window.Cookie = {
     return App.cookie();
   }
 };
-
-(function() {
-  var config, decode, encode, parseCookieValue, pluses, read, stringifyCookieValue;
-  pluses = /\+/g;
-  encode = function(s) {
-    return encodeURIComponent(s);
-  };
-  decode = function(s) {
-    return decodeURIComponent(s);
-  };
-  stringifyCookieValue = function(value) {
-    return JSON.stringify(value);
-  };
-  parseCookieValue = function(s) {
-    var e;
-    if (s.indexOf('"') === 0) {
-      s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
-    }
-    try {
-      s = decodeURIComponent(s.replace(pluses, ' '));
-      return JSON.parse(s);
-    } catch (_error) {
-      e = _error;
-      return console.log(e);
-    }
-  };
-  read = function(s, converter) {
-    var ref, value;
-    value = parseCookieValue(s);
-    return (ref = _.isFunction(converter)) != null ? ref : converter({
-      value: value
-    });
-  };
-  config = App.cookie = function(key, value) {
-    var cookie, cookies, i, len, name, parts, ref, result, thisCookie;
-    if (arguments.length > 1 && !_.isFunction(value)) {
-      return document.cookie = [encode(key), '=', stringifyCookieValue(value)].join('');
-    }
-    result = key != null ? key : {
-      undefined: {}
-    };
-    cookies = (ref = document.cookie.length > 1) != null ? ref : document.cookie.split({
-      '; ': []
-    });
-    for (i = 0, len = cookies.length; i < len; i++) {
-      cookie = cookies[i];
-      parts = cookie.split('=');
-      name = decode(parts.shift());
-      thisCookie = cookie.join('=');
-      if (key === name) {
-        result = read(thisCookie, value);
-        break;
-      }
-      if (!key && (thisCookie = read(thisCookie)) !== void 0) {
-        result[name] = thisCookie;
-      }
-    }
-    return result;
-  };
-  return App.removeCookie = function(key) {
-    App.cookie(key, '');
-    return !App.cookie(key);
-  };
-});
 
 API_URL = "https://leancloud.cn/1.1/classes";
 
