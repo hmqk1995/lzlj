@@ -100,12 +100,7 @@ $(document).ready(function(){
 		//战绩按钮
 		$('#score').on('tap', function(){
 			// 判断是否为第一次进入游戏，若不是则进入网站优惠券页面
-			if (firstIn == true) {
-				showMask();
-				addButtonListener();
-				var imgSrc = '<img src="/assets/images/togetpride.png" alt="" style="width:160px;position:absolute;top:60%;left:50%;margin-left:-75px;margin-top:-120px;"/>';
-				$('#panel_list')[0].innerHTML += imgSrc;
-			} else {
+			if (Cookie.read('hasGift') == true) {
 				var s = share.host;
 				switch (s)  {
 					case 0:
@@ -115,6 +110,11 @@ $(document).ready(function(){
 					 location.href = 'http://shop1240998.koudaitong.com/v2/showcase'; 
 					 break;
 				}
+			} else {
+				showMask();
+				addButtonListener();
+				var imgSrc = '<img src="/assets/images/togetpride.png" alt="" style="width:160px;position:absolute;top:60%;left:50%;margin-left:-75px;margin-top:-120px;"/>';
+				$('#panel_list')[0].innerHTML += imgSrc;
 			}
 		});
 		//开始按钮

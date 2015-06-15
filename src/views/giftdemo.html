@@ -56,9 +56,15 @@
 	<script type="text/javascript" src="/assets/js/underscore.min.js"></script>
 	<script type="text/javascript" src="/assets/js/z_server.min.js"></script>
 	<script type="text/javascript">
-		lzlj_id = Cookie.read('lzlj_id');
-		share = new Share(lzlj_id);
-		share.getTicket();
+		var lzlj_id = Cookie.read('lzlj_id');
+		var share = new Share(lzlj_id);
+		var ticket;
+		$(document).ready(function(){
+			ticket = share.getTicket('jxw');
+		});
+		$('#giftdemo3').on('tap',function(){
+			location.href = ticket.url;
+		});
 	</script>
 </body>
 </html>

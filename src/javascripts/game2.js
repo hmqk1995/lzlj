@@ -6,6 +6,27 @@ $(document).ready(function() {
 	hashId = location.hash;
 	hashId = hashId.slice(1);
 	if (hashId.length === 0) {location.href='index.html';} //如果没有hashId自动跳转到首页
+
+	//返回帮助数量	
+	function returnHelper () {
+		var img = document.getElementById('img_area_game2_5');
+		switch (share.helper) {
+			case share.helper >= 2 :
+				//背景图片为获得奖品
+				//跳转链接
+				img.setAttribute('src', '/assets/images/game2_over.png');
+				break;
+			case 1 :
+				//还有一位
+				img.setAttribute('src', '/assets/images/game2_1f.png');
+				break;
+			case 0 :
+				//还有两位
+				img.setAttribute('src', '/assets/images/game2_2f.png');
+				break;
+		}
+	}
+
 	//读取单个cookie
 	lzlj_id = Cookie.read('lzlj_id');
 	if (lzlj_id == '' || lzlj_id == undefined || lzlj_id != hashId) {
@@ -25,26 +46,8 @@ $(document).ready(function() {
 				var helpSucceed = share.help();
 				if (helpSucceed == true) {
 					$('#img_area_game2_7').addClass('animated hinge');
-					//返回帮助数量	
-					var img = document.getElementById('img_area_game2_5');
-					switch (share.helper) {
-						case share.helper >= 2 :
-							//背景图片为获得奖品
-							//跳转链接
-							img.setAttribute('src', '/assets/images/game2_over.png');
-							break;
-						case 1 :
-							//还有一位
-							img.setAttribute('src', '/assets/images/game2_1f.png');
-							break;
-						case 0 :
-							//还有两位
-							img.setAttribute('src', '/assets/images/game2_2f.png');
-							break;
-					}
-					// setTimeout(function(){
-					// 	window.location.replace('giftdemo.html');
-					// }, 1500);
+					returnHelper();
+					alert('成功帮Ta撕下了一个名牌！快去告诉Ta吧！');
 				} else {
 					$('#img_area_game2_7').one('swipeRight', toHelp);
 				}
@@ -59,12 +62,17 @@ $(document).ready(function() {
 			var hasGame = Cookie.read('hasGame');
 			if (hasGame == 'true') {
 				var fNumber = share.helper;
+				returnHelper();
 				if (fNumber < 2) {
-					alert('你已经撕过自己的名牌啦！已经有'+ fNumber +'位朋友帮你撕过名牌。有两位朋友撕了名牌你就能获得奖品！');
+					alert('有两位朋友撕了名牌你就能获得奖品！已经有'+ fNumber +'位朋友帮你撕过名牌。');
+					$('#img_area_game2_7').addClass('animated hinge');
+					setTimeout(function(){$('#img_area_game2_7').hide();$('#img_area_game2_8').hide();}, 1000);
 					return;
 				}
 				if (fNumber >= 2) {
-					alert('恭喜！已经有两位好友帮你撕了名牌！你可以获得奖品！');
+					alert('恭喜！已经有两位好友帮你撕了名牌！你现在可以获得奖品！');
+					$('#img_area_game2_7').addClass('animated hinge');
+					setTimeout(function(){$('#img_area_game2_7').hide();$('#img_area_game2_8').hide();}, 1000);
 					location.replace('giftdemo.html' + '\#' +lzlj_id);
 					return;
 				}
