@@ -216,6 +216,7 @@ html,body {
 	position: relative;
 	background: url('../images/game_arr.png') #fcd700 center top;
 	background-size: 95px;
+	overflow: hidden;
 }
 
 #game_bs {

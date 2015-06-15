@@ -1,7 +1,7 @@
 var share,shareId;
 var firstIn = false;
 //公司参数
-var HOSTID = 0; //0为酒仙网，1为三人炫
+var HOSTID = 1; //0为酒仙网，1为三人炫
 $(document).ready(function(){
 	//统计
 	App.analyse("test", "index");
@@ -48,8 +48,23 @@ $(document).ready(function(){
 		//规则按钮
 		$('#rule').on('tap', function(){
 			showMask();
-			var imgSrc = '<img src="/assets/images/txt1.png" alt="" style="width:160px;position:absolute;top:60%;left:50%;margin-left:-75px;margin-top:-120px;"/>';
+			var imgSrc = '<img id="imgsrc" src="/assets/images/intro_1.png" alt="" style="width:160px;position:absolute;top:55%;left:50%;margin-left:-75px;margin-top:-120px;"/>';
+			var buttonL = '<img id="button_l1" src="/assets/images/button_l.png" alt="" style="width:30px;position:absolute;bottom:25%;left:28%;margin-top:-120px;" />';
+			var buttonR = '<img id="button_r1" src="/assets/images/button_r.png" alt="" style="width:30px;position:absolute;bottom:25%;right:25%;margin-top:-120px;" />';
 			$('#panel_list')[0].innerHTML += imgSrc;
+			$('#panel_list')[0].innerHTML += buttonL;
+			$('#panel_list')[0].innerHTML += buttonR;
+			$('#button_l1').hide();
+			$('#button_r1').on('tap', function(){
+				$('#imgsrc').attr('src', '/assets/images/intro_2.png')
+				$(this).hide();
+				$('#button_l1').show();
+			});
+			$('#button_l1').on('tap', function(){
+				$('#imgsrc').attr('src', '/assets/images/intro_1.png');
+				$(this).hide();
+				$('#button_r1').show();
+			});
 			addButtonListener();
 		});
 		//产品介绍按钮
@@ -58,6 +73,8 @@ $(document).ready(function(){
 			var imgSrc = '<img id="desc_img" src="/assets/images/txt2.png" alt="" style="width:160px;position:absolute;top:55%;left:50%;margin-left:-75px;margin-top:-120px;" />';
 			var buttonL = '<img id="button_l" src="/assets/images/button_l.png" alt="" style="width:30px;position:absolute;bottom:25%;left:28%;margin-top:-120px;" />';
 			var buttonR = '<img id="button_r" src="/assets/images/button_r.png" alt="" style="width:30px;position:absolute;bottom:25%;right:25%;margin-top:-120px;" />';
+			$('#button_r').unbind('click');
+			$('#button_l').unbind('click');
 			$('#panel_list')[0].innerHTML += imgSrc;
 			$('#panel_list')[0].innerHTML += buttonL;
 			$('#panel_list')[0].innerHTML += buttonR;

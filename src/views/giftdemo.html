@@ -44,29 +44,94 @@
 			margin-left: -15%;
 			bottom: 10%;
 		}
+		#count{
+			color: red;
+			font-size: 38px;
+			position: absolute;
+			left: 44%;
+			bottom: 25%;
+		}
 	</style>
 </head>
 <body>
 	<div id="demo_container">
-		<img id="giftdemo" class="animated bounceIn" src="/assets/images/gift_bottle.png" alt="" />
+		<img id="giftdemo" class="animated bounceIn" src="/assets/images/gift_coupon.png" alt="奖品图片" />
 		<img id="giftdemo1" class="animated bounceInDown" src="/assets/images/gift_txt_b.png" alt="" />
 		<img id="giftdemo3" src="/assets/images/giftdemo3.png" alt="" />
+		<div id="count">5</div>
 	</div>
 	<script type="text/javascript" src="/assets/js/0-zepto.min.js"></script>
 	<script type="text/javascript" src="/assets/js/underscore.min.js"></script>
 	<script type="text/javascript" src="/assets/js/z_server.min.js"></script>
 	<script type="text/javascript">
+		var domain;
 		var lzlj_id = Cookie.read('lzlj_id');
 		var share = new Share(lzlj_id);
 		var ticket;
+		if (share.host == 0) { domain = 'jxw';} else { domain = 'srx';}
 		$(document).ready(function(){
-			ticket = share.getTicket('jxw');
-			$('#giftdemo3').on('tap',function(){
-				Cookie.set('hasTicket','true');
-				location.href = ticket.url;
-			});
+			ticket = share.getTicket(domain);
+			function confirmSelf () {
+				if (lzlj_id != share.objectId) {
+					alert('验证失败，请您重新开始游戏！');
+					location.replace('index.html');
+					return false;
+				}
+			}
+			if (ticket.type == 0) {
+				$('#giftdemo').attr('src','/assets/images/gift_coupon.png');
+				$('#giftdemo1').attr('src','/assets/images/gift_txt_c.png');
+				$('#count').html('5');
+				$('#giftdemo3').on('tap',function(){
+					Cookie.set('hasTicket','true');
+					location.href = ticket.url;
+					confirmSelf();
+				});
+				return;
+			}
+			if (ticket.type == 1) {
+				$('#giftdemo').attr('src','/assets/images/gift_coupon.png');
+				$('#giftdemo1').attr('src','/assets/images/gift_txt_c.png');
+				$('#count').html('10');
+				$('#giftdemo3').on('tap',function(){
+					Cookie.set('hasTicket','true');
+					location.href = ticket.url;
+					confirmSelf();
+				});
+				return;
+			}
+			if (ticket.type == 2) {
+				$('#giftdemo').attr('src','/assets/images/gift_coupon.png');
+				$('#giftdemo1').attr('src','/assets/images/gift_txt_c.png');
+				$('#count').html('30');
+				$('#giftdemo3').on('tap',function(){
+					Cookie.set('hasTicket','true');
+					location.href = ticket.url;
+					confirmSelf();
+				});
+				return;
+			}
+			if (ticket.type == 3) {
+				$('#giftdemo').attr('src','/assets/images/gift_coupon.png');
+				$('#giftdemo1').attr('src','/assets/images/gift_txt_b.png');
+				$('#count').html('');
+				$('#giftdemo3').on('tap',function(){
+					Cookie.set('hasTicket','true');
+					location.href = ticket.url;
+				});
+				return;
+			}
+			if (ticket.type == 4) {
+				$('#giftdemo').attr('src','/assets/images/gift_coupon.png');
+				$('#giftdemo1').attr('src','/assets/images/gift_txt_b.png');
+				$('#count').html('5');
+				$('#giftdemo3').on('tap',function(){
+					Cookie.set('hasTicket','true');
+					location.href = ticket.url;
+				});
+				return;
+			}
 		});
-
 	</script>
 </body>
 </html>
