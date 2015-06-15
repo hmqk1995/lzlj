@@ -56,15 +56,14 @@ $(document).ready(function() {
 	} else {
 		// 创建share对象
 		share = new Share(lzlj_id);
-		//显示 自己的页面
-		$('#img_area_game2_7').bind('swipeRight',function(){
+		function swipeRight(){
 			$('#img_area_game2_7').addClass('animated hinge');
 			var hasGame = Cookie.read('hasGame');
 			if (hasGame == 'true') {
 				var fNumber = share.helper;
 				returnHelper();
 				if (fNumber < 2) {
-					alert('有两位朋友撕了名牌你就能获得奖品！已经有'+ fNumber +'位朋友帮你撕过名牌。');
+					alert('已经有'+ fNumber +'位朋友帮你撕过名牌。总共两位朋友帮你撕了名牌你就能获得奖品！');
 					$('#img_area_game2_7').addClass('animated hinge');
 					setTimeout(function(){$('#img_area_game2_7').hide();$('#img_area_game2_8').hide();}, 1000);
 					return;
@@ -76,11 +75,12 @@ $(document).ready(function() {
 					location.replace('giftdemo.html' + '\#' +lzlj_id);
 					return;
 				}
-				
 			}
 			alert('你撕下了一张名牌，还需要两位朋友帮忙就能获得大礼！分享到朋友圈让他们来帮忙！');
 			Cookie.set('hasGame', 'true');
-		});
+		}
+		//显示 自己的页面
+		$('#img_area_game2_7').bind('swipeRight', swipeRight);
 		//按钮 “让朋友一起撕”
 			$('#img_area_game2_4').show();
 	}
@@ -91,26 +91,25 @@ $(document).ready(function() {
 		setTimeout(function(){$("#game2_wrapper").removeClass('fadeIn')}, 1800);
 	}());
 	//点击按钮出现遮罩
-	(function () {
-		var container = document.getElementById('game2_container');
-		$('#img_area_game2_4').on('tap', function tap() {
-			var mask = document.getElementById('mask3');
-			mask3.style.display = "block";
-			container.innerHTML += '<img id="share_img" src="/assets/images/share.png" style="position:absolute;z-index:1000;width:50%;right:10%;top:30px;" />';
-			$('#mask3').on('tap', function() {
-				$(this).hide();
-				$('#share_img').remove();
-				$('#img_area_game2_4').on('tap', tap);
-			});
+	var container = document.getElementById('game2_container');
+	$('#img_area_game2_4').on('tap', function tap() {
+		var mask = document.getElementById('mask3');
+		mask3.style.display = "block";
+		container.innerHTML += '<img id="share_img" src="/assets/images/share.png" style="position:absolute;z-index:1000;width:50%;right:10%;top:30px;" />';
+		$('#mask3').on('tap', function() {
+			$(this).hide();
+			$('#share_img').remove();
+			$('#img_area_game2_4').on('tap', tap);
+			$('#img_area_game2_7').bind('swipeRight', swipeRight);
 		});
-	}());
+	});
 	//手过一段时间消失
 	setTimeout(function(){$('#img_area_game2_8').removeClass('infinite').addClass('slideOutRight');}, 2000);
 
 	// 音乐播放
 	function playMusic() {
 	    var audio = document.getElementById('audio');
-	    // audio.play();
+	    audio.play();
 	    audio.loop = true;
 	}
 	playMusic();

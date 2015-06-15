@@ -61,7 +61,7 @@ $(document).ready(function(){
 	// 音乐播放
 	function playMusic() {
 	    var audio = document.getElementById('audio');
-	    // audio.play();
+	    audio.play();
 	    audio.loop = true;
 	}
 	playMusic();

@@ -1,5 +1,7 @@
 var share,shareId;
 var firstIn = false;
+//公司参数
+var HOSTID = 0; //0为酒仙网，1为三人炫
 $(document).ready(function(){
 	//统计
 	App.analyse("test", "index");
@@ -9,7 +11,7 @@ $(document).ready(function(){
 		
 		if(lzlj_id == "" || lzlj_id == undefined) {
 			share = new Share();
-			share.create({'host': 0});
+			share.create({'host': HOSTID});
 			shareId = share.objectId;
 			Cookie.set('lzlj_id', shareId);
 			firstIn = true;
@@ -100,7 +102,7 @@ $(document).ready(function(){
 		//战绩按钮
 		$('#score').on('tap', function(){
 			// 判断是否为第一次进入游戏，若不是则进入网站优惠券页面
-			if (Cookie.read('hasGift') == true) {
+			if (Cookie.read('hasGift') == 'true') {
 				var s = share.host;
 				switch (s)  {
 					case 0:
@@ -119,12 +121,17 @@ $(document).ready(function(){
 		});
 		//开始按钮
 		$('#start').on('tap', function(){
-			if (share.helper == 0) {
-			  location.hash = shareId;
-			  location.href ='game.html' + location.hash;
-			} else {
+			var hasTicket = Cookie.read('hasTicket');
+			var hasGame = Cookie.read('hasGame');
+			if (hasTicket == "true") {
+			  alert('你已经领过了奖品，去战绩栏查看吧！');
+			  return false;
+			} else  if (hasGame == "true"){
 			  location.hash = shareId;
 			  location.href = 'game2.html' + location.hash;
+			} else {
+			  location.hash = shareId;
+			  location.href = 'game.html' + location.hash;
 			}
 		});
 	}());
@@ -175,7 +182,7 @@ $(document).ready(function(){
 	// 音乐播放
 	function playMusic() {
 	    var audio = document.getElementById('audio');
-	    // audio.play();
+	    audio.play();
 	    audio.loop = true;
 	}
 });

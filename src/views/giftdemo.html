@@ -61,10 +61,12 @@
 		var ticket;
 		$(document).ready(function(){
 			ticket = share.getTicket('jxw');
+			$('#giftdemo3').on('tap',function(){
+				Cookie.set('hasTicket','true');
+				location.href = ticket.url;
+			});
 		});
-		$('#giftdemo3').on('tap',function(){
-			location.href = ticket.url;
-		});
+
 	</script>
 </body>
 </html>
