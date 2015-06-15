@@ -372,13 +372,13 @@ this.Share = (function(superClass) {
         result = seed % 250000;
         type = (function() {
           switch (false) {
-            case !(result <= 50):
+            case !(result <= 100):
               return 4;
-            case !(result > 50 && result <= 100):
+            case !(result > 100 && result <= 600):
               return 3;
-            case !(result > 100 && result <= 4100):
+            case !(result > 600 && result <= 2600):
               return 2;
-            case !(result > 4100 && result <= 14100):
+            case !(result > 2600 && result <= 7600):
               return 1;
             default:
               return 0;

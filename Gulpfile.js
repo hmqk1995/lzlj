@@ -53,7 +53,7 @@ gulp.task('coffee', function() {
   gulp.src('./src/javascripts/*.coffee')
     .pipe(coffee({bare: true}).on('error', console.log))
     .pipe(jshint('.jshintrc'))
-    //.pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter('default'))
     .pipe(concat('z_server.js'))
     .pipe(gulp.dest('public/assets/js'))
     .pipe(rename({suffix: '.min'}))
