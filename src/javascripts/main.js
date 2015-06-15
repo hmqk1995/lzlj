@@ -102,7 +102,7 @@ $(document).ready(function(){
 		//战绩按钮
 		$('#score').on('tap', function(){
 			// 判断是否为第一次进入游戏，若不是则进入网站优惠券页面
-			if (Cookie.read('hasGift') == 'true') {
+			if (Cookie.read('hasTicket') == 'true') {
 				var s = share.host;
 				switch (s)  {
 					case 0:

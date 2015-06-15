@@ -57,8 +57,14 @@ $(document).ready(function() {
 		// 创建share对象
 		share = new Share(lzlj_id);
 		function swipeRight(){
-			$('#img_area_game2_7').addClass('animated hinge');
 			var hasGame = Cookie.read('hasGame');
+			var hasTicket = Cookie.read('hasTicket');
+			if (hasTicket == 'true') {
+				alert('你已经领过奖品啦！返回战绩栏查看哦！');
+				location.replace('index.html');
+				return;
+			}
+			$('#img_area_game2_7').addClass('animated hinge');
 			if (hasGame == 'true') {
 				var fNumber = share.helper;
 				returnHelper();
