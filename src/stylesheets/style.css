@@ -270,7 +270,8 @@ html,body {
 	background: url('../images/game2_win.png') no-repeat;
 	background-size: 100%;
 	left: 50%;
-	top: 100px;
+	top: 160px;
+	z-index: 9999;
 }
 
 /*****************************
