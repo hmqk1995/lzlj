@@ -1,27 +1,41 @@
 var share,shareId;
 var firstIn = false;
 //公司参数
-var HOSTID = 0; //0为酒仙网，1为三人炫
+var HOSTID = 1; //0为酒仙网，1为三人炫
 //判断酒仙网 or 三人炫
-function judgeHost() {
+// function judgeHost() {
+// 	var hostName = location.hostname.toLowerCase();
+// 	if (hostName.indexOf('jxw') > -1) {
+// 		HOSTID = 0;
+// 		return true;
+// 	}
+// 	if (hostName.indexOf('srx') > -1) {
+// 		HOSTID = 1;
+// 		return true;
+// 	}
+// 	return false;
+// }
+// var judgeHost = judgeHost();
+function judgeHost2() {
 	var hostName = location.hostname.toLowerCase();
-	if (hostName.indexOf('jxw') > -1) {
+	hostName = hostName.split('.');
+	if ( hostName[0] === 'oy' || hostName[0] === 'kk' || hostName[0] === 'lt' ) {
 		HOSTID = 0;
 		return true;
 	}
-	if (hostName.indexOf('srx') > -1) {
+	if ( hostName[0] === 'rp' || hostName[0] === 'nh' ) {
 		HOSTID = 1;
 		return true;
 	}
 	return false;
 }
-var judgeHost = judgeHost();
+var judgeHost2 = judgeHost2();
 
 $(document).ready(function(){
-	if ( judgeHost === false ) {
-		console.log('加载服务器失败！随机选取一个站点');
-		HOSTID = Math.floor(Math.random()*2);
-	}
+	// if ( judgeHost2 === false ) {
+	// 	console.log('加载服务器失败！随机选取一个站点');
+	// 	HOSTID = Math.floor(Math.random()*2);
+	// }
 	//统计
 	App.analyse("test", "index");
 	//cookie判断
