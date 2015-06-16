@@ -1,8 +1,23 @@
 var share,shareId;
 var firstIn = false;
 //公司参数
-var HOSTID = 1; //0为酒仙网，1为三人炫
+var HOSTID; //0为酒仙网，1为三人炫
+//判断酒仙网 or 三人炫
+function judgeHost() {
+	var hostName = location.hostname.toLowerCase();
+		if (hostName.indexOf('jxw') > -1) {
+			HOSTID = 0;
+		}
+		if (hostName.indexOf('srx') > -1) {
+			HOSTID = 1;
+		}
+}
+judgeHost();
+
 $(document).ready(function(){
+	if ( HOSTID === undefined ) {
+		judgeHost();
+	}
 	//统计
 	App.analyse("test", "index");
 	//cookie判断
