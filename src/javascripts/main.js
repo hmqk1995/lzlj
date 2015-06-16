@@ -135,15 +135,9 @@ $(document).ready(function(){
 		$('#score').on('tap', function(){
 			// 判断是否为第一次进入游戏，若不是则进入网站优惠券页面
 			if (Cookie.read('hasTicket') == 'true') {
-				var s = share.host;
-				switch (s)  {
-					case 0:
-					 location.href = 'http://m.jiuxian.com/m_v1/user/bonus_list';
-					 break;
-					case 1:
-					 location.href = 'http://shop1240998.koudaitong.com/v2/showcase'; 
-					 break;
-				}
+				var t = share.getTicket();
+				location.href = t.url;
+				return;
 			} else {
 				showMask();
 				addButtonListener();

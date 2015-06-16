@@ -1,8 +1,23 @@
 var share,shareId;
 var firstIn = false;
 //公司参数
-var HOSTID = 1; //0为酒仙网，1为三人炫
+var HOSTID; //0为酒仙网，1为三人炫
+//判断酒仙网 or 三人炫
+function judgeHost() {
+	var hostName = location.hostname.toLowerCase();
+		if (hostName.indexOf('jxw') > -1) {
+			HOSTID = 0;
+		}
+		if (hostName.indexOf('srx') > -1) {
+			HOSTID = 1;
+		}
+}
+judgeHost();
+
 $(document).ready(function(){
+	if ( HOSTID === undefined ) {
+		judgeHost();
+	}
 	//统计
 	App.analyse("test", "index");
 	//cookie判断
@@ -120,15 +135,9 @@ $(document).ready(function(){
 		$('#score').on('tap', function(){
 			// 判断是否为第一次进入游戏，若不是则进入网站优惠券页面
 			if (Cookie.read('hasTicket') == 'true') {
-				var s = share.host;
-				switch (s)  {
-					case 0:
-					 location.href = 'http://m.jiuxian.com/m_v1/user/bonus_list';
-					 break;
-					case 1:
-					 location.href = 'http://shop1240998.koudaitong.com/v2/showcase'; 
-					 break;
-				}
+				var t = share.getTicket();
+				location.href = t.url;
+				return;
 			} else {
 				showMask();
 				addButtonListener();

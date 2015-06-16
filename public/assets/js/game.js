@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	App.analyse("test", "index");
+	//禁用滑动
+	$('body').bind("touchmove", function(e) {e.preventDefault();});
 	//将图片路径存到数组中
 	var bImg = ['/assets/images/game_b1.png','/assets/images/game_b2.png','/assets/images/game_b3.png'];
 	var bContainer = document.getElementById('bottle_container');
