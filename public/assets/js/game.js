@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	App.analyse("test", "index");
+	App.analyse("wechat", "game");
 	//禁用滑动
 	$('body').bind("touchmove", function(e) {e.preventDefault();});
 	//将图片路径存到数组中
