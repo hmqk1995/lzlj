@@ -1,6 +1,6 @@
 var share,lzlj_id,hashId;
 $(document).ready(function() {
-	App.analyse("test", "game2");
+	App.analyse("wechat", "help");
 	//解决安卓的swipe失效问题
 	$('body').bind("touchmove", function(e) {e.preventDefault();});
 	hashId = location.hash;
