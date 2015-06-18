@@ -10,7 +10,7 @@ window.App =
     getStatus: ->
 
     channel: ->
-        return "test"
+        return "WeChat"
 
     analyse: (platform, pageName) ->
         id = (Math.random() * Math.random()).toString(16)

@@ -14,7 +14,7 @@ window.App = {
   },
   getStatus: function() {},
   channel: function() {
-    return "test";
+    return "WeChat";
   },
   analyse: function(platform, pageName) {
     var id;
