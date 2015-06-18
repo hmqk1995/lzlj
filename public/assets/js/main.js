@@ -37,7 +37,7 @@ $(document).ready(function(){
 	// 	HOSTID = Math.floor(Math.random()*2);
 	// }
 	//统计
-	App.analyse("wx", "index");
+	App.analyse("wechat", "index");
 	//cookie判断
 		//读取单个cookie
 		var lzlj_id = Cookie.read('lzlj_id'); //备注：获取不到会返回空字符串
